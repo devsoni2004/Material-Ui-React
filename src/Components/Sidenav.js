@@ -105,7 +105,7 @@ export default function SideNav() {
                             >
                                 <InboxIcon />
                             </ListItemIcon>
-                            <ListItemText primary="Home" sx={{ opacity: open ? 1 : 0 }} />
+                            <ListItemText primary="Dashboard" sx={{ opacity: open ? 1 : 0 }} />
                         </ListItemButton>
                     </ListItem>
                     <ListItem disablePadding sx={{ display: 'block' }} onClick={() => { navigate("/AllMerchantsData") }}>

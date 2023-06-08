@@ -43,3 +43,9 @@
     font-weight: 600;
     color: #000;
 }
+
+.btn-outer {
+    margin-top: 15px;
+    display: flex;
+    justify-content: end;
+}

@@ -13,6 +13,7 @@ import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import CreditCardIcon from '@mui/icons-material/CreditCard';
 import Barcharts from '../Charts/Barcharts';
 import PieCharts from '../Charts/PieCharts';
+import CountUp from 'react-countup';
 import "../Dasboard.css";
 const Home = () => {
     return (
@@ -34,7 +35,7 @@ const Home = () => {
                                                 <CreditCardIcon sx={{ color: "#fff" }} />
                                             </div>
                                             <Typography gutterBottom variant="h5" component="div" sx={{ color: "#fff" }}>
-                                                80
+                                                <CountUp delay={0.4} end={500} duration={0.6} />
                                             </Typography>
                                             <Typography gutterBottom variant="body2" component="div" sx={{ color: "#fff" }}>
                                                 Total Merchants
@@ -47,7 +48,7 @@ const Home = () => {
                                                 <ShoppingBagIcon sx={{ color: "#fff" }} />
                                             </div>
                                             <Typography gutterBottom variant="h5" component="div" sx={{ color: "#fff" }}>
-                                                121
+                                                <CountUp delay={0.4} end={2000} duration={0.6} />
                                             </Typography>
                                             <Typography gutterBottom variant="body2" component="div" sx={{ color: "#fff" }}>
                                                 Total User
@@ -66,7 +67,9 @@ const Home = () => {
                                             </div>
 
                                             <div className="padding-all">
-                                                <span className="price-title">15</span>
+                                                <span className="price-title">
+                                                    <CountUp delay={0.4} end={8000} duration={0.6} />
+                                                </span>
                                                 <br />
                                                 <span className="sub-title">Cancel User</span>
                                             </div>
@@ -80,7 +83,9 @@ const Home = () => {
                                             </div>
 
                                             <div className="padding-all">
-                                                <span className="price-title">68 </span>
+                                                <span className="price-title">
+                                                    <CountUp delay={0.2} end={7000} duration={0.6} />
+                                                </span>
                                                 <br />
                                                 <span className="sub-title">Accpet Users</span>
                                             </div>

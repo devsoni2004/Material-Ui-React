@@ -17,6 +17,7 @@ import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import Person3Icon from '@mui/icons-material/Person3';
 import { useNavigate } from "react-router-dom"
 import { useAppStore } from '../appStore';
+
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -71,13 +72,13 @@ export default function SideNav() {
     const navigate = useNavigate();
     const updateOpen = useAppStore((state) => state.updateOpen);
     const open = useAppStore((state) => state.dopen);
-
     return (
-        <Box sx={{ display: 'flex' }}>
+        
+        <Box sx={{ display: 'flex' }} >
             <CssBaseline />
-            <Box height={30} />
-            <Drawer variant="permanent" open={open}>
-                <DrawerHeader>
+            <Box height={30} sx={{backgroundColor:'red'}}/>
+            <Drawer variant="permanent" open={open} >
+                <DrawerHeader > 
                     <IconButton>
                         {theme.direction === "rtl" ? (
                             <ChevronRightIcon />
@@ -87,8 +88,8 @@ export default function SideNav() {
                     </IconButton>
                 </DrawerHeader>
                 <Divider />
-                <List>
-                    <ListItem disablePadding sx={{ display: 'block' }} onClick={() => { navigate("/") }} >
+                <List >
+                    <ListItem disablePadding sx={{ display: 'block' }} onClick={() => { navigate("/") }}>
                         <ListItemButton
                             sx={{
                                 minHeight: 48,
@@ -151,7 +152,6 @@ export default function SideNav() {
                 </List>
                 <Divider />
             </Drawer>
-
         </Box>
     );
 }

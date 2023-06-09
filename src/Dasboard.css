@@ -49,3 +49,12 @@
     display: flex;
     justify-content: end;
 } */
+
+
+.custom-spacing{
+    margin-bottom: 10px;
+}
+
+.sidebg{
+    background-color: red;
+}

@@ -33,10 +33,10 @@ const style = {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: '70%',
-    height:'80%',
+    height: '80%',
     bgcolor: 'background.paper',
     border: '2px solid #000',
-    overflow:'scroll',
+    overflow: 'scroll',
     boxShadow: 24,
     p: 4,
 };
@@ -172,26 +172,23 @@ export default function MerchantsList() {
     }
     return (
         <>
-            <div>
-                {/* <Button onClick={handleOpen}>Open modal</Button> */}
-                <Modal
-                    open={open}
-                    onClose={handleClose}
-                    aria-labelledby="modal-modal-title"
-                    aria-describedby="modal-modal-description"
-                >
-                    <Box sx={style}>
-                      <AddMerchants closeEvent={handleClose}/>
-                    </Box>
-                </Modal>
-            </div>
-            <Paper sx={{ width: '80%', overflow: 'hidden', marginLeft: '60px' }}>
+            <Modal
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+            >
+                <Box sx={style}>
+                    <AddMerchants closeEvent={handleClose} />
+                </Box>
+            </Modal>
 
+            <Paper>
                 <Typography
                     gutterBottom
                     variant="h5"
                     component="div"
-                    sx={{ padding: "20px" }}
+                    sx={{ padding: "12px" }}
                 >
                     All Merchants Data
                 </Typography>
@@ -210,7 +207,6 @@ export default function MerchantsList() {
                 <Divider />
                 <Box height={10} />
                 <Stack direction="row" spacing={2} className="my-2 mb-2">
-
                     <Typography
                         variant="h6"
                         component="div"

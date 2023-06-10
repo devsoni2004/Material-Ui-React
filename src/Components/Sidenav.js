@@ -72,13 +72,18 @@ export default function SideNav() {
     const navigate = useNavigate();
     const updateOpen = useAppStore((state) => state.updateOpen);
     const open = useAppStore((state) => state.dopen);
+
+    const navigateTo = (path) => {
+        console.log(path);
+        navigate(path)
+    }
     return (
-        
+
         <Box sx={{ display: 'flex' }} >
             <CssBaseline />
-            <Box height={30} sx={{backgroundColor:'red'}}/>
+            <Box height={30} sx={{ backgroundColor: 'red' }} />
             <Drawer variant="permanent" open={open} >
-                <DrawerHeader > 
+                <DrawerHeader >
                     <IconButton>
                         {theme.direction === "rtl" ? (
                             <ChevronRightIcon />
@@ -89,7 +94,7 @@ export default function SideNav() {
                 </DrawerHeader>
                 <Divider />
                 <List >
-                    <ListItem disablePadding sx={{ display: 'block' }} onClick={() => { navigate("/") }}>
+                    <ListItem disablePadding sx={{ display: 'block' }} onClick={()=>navigateTo("/")}>
                         <ListItemButton
                             sx={{
                                 minHeight: 48,
@@ -109,7 +114,7 @@ export default function SideNav() {
                             <ListItemText primary="Dashboard" sx={{ opacity: open ? 1 : 0 }} />
                         </ListItemButton>
                     </ListItem>
-                    <ListItem disablePadding sx={{ display: 'block' }} onClick={() => { navigate("/AllMerchantsData") }}>
+                    <ListItem disablePadding sx={{ display: 'block' }} onClick={()=>navigateTo("/AllMerchantsData")}>
                         <ListItemButton
                             sx={{
                                 minHeight: 48,
@@ -129,7 +134,7 @@ export default function SideNav() {
                             <ListItemText primary="All Merchants Data" sx={{ opacity: open ? 1 : 0 }} />
                         </ListItemButton>
                     </ListItem>
-                    <ListItem disablePadding sx={{ display: 'block' }} onClick={() => { navigate("/AcceptUsers") }}>
+                    <ListItem disablePadding sx={{ display: 'block' }} onClick={()=>navigateTo("/AcceptUsers")}>
                         <ListItemButton
                             sx={{
                                 minHeight: 48,

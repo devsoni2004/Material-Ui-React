@@ -3,14 +3,19 @@ import { Grid,Paper, Avatar, TextField, Button, Typography } from '@mui/material
 import LockIcon from '@mui/icons-material/Lock';
 import FormGroup from '@mui/material/FormGroup';
 import Checkbox from '@mui/material/Checkbox';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Login=()=>{
+    const navigate=useNavigate();
 
     const paperStyle={padding :20,height:'70vh',width:500, margin:"20px auto"}
     const avatarStyle={backgroundColor:'#1bbd7e'}
     const customspacing ={}
     const btnstyle={margin:'8px 0'}
+
+    const handleLogin=()=>{
+        navigate("/")
+    }
     return(
         <Grid sx={{ mt:10   }}>
             <Paper elevation={10} style={paperStyle} >
@@ -29,16 +34,16 @@ const Login=()=>{
                     }
                     label="Remember me"
                  />
-                <Button type='submit' color='primary' variant="contained" style={btnstyle} fullWidth>Sign in</Button>
+                <Button type='submit' color='primary' variant="contained" style={btnstyle} fullWidth onClick={handleLogin}>Sign in</Button>
                 <Typography >
-                     <Link to="../Forget">
+                     <Link to="/Forget">
                         Forgot password ?
                 </Link>
                 </Typography>
                 <Typography > Do you have an account ?
-                     <Link to="" >
+                     <Link to="/register" >
                         Sign Up 
-                </Link>
+                    </Link>
                 </Typography>
             </Paper>
         </Grid>

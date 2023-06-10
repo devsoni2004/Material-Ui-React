@@ -5,10 +5,11 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 // import { BrowserRouter } from 'react-router-dom';
 import { AuthProvider } from "react-auth-kit";
+import AppLayout from './AppLayout';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <AuthProvider
+    {/* <AuthProvider
       domain="dev-pex3oxbxmwhhmn5o.us.auth0.com"
       clientId="dedFIFB7fl8c1pm38aLTQCxYqebYDfpJ"
       authType={"cookie"}
@@ -17,7 +18,8 @@ root.render(
       cookieSecure={window.location.protocol === "https:"}
     >
       <App />
-    </AuthProvider>
+    </AuthProvider> */}
+    <AppLayout/>
   </React.StrictMode>
 );
 

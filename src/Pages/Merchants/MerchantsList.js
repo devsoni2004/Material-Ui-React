@@ -5,13 +5,14 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
-import { useDownloadExcel } from 'react-export-table-to-excel'
-import { useRef } from 'react'
-import { utils, read } from 'xlsx'
+// import { useDownloadExcel } from 'react-export-table-to-excel'
+// import { useRef } from 'react'
+import { saveAs } from 'file-saver';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import { useState, useEffect } from 'react'
 import axios from 'axios';
+import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import EditIcon from "@mui/icons-material/Edit";
@@ -20,23 +21,23 @@ import TextField from "@mui/material/TextField";
 import Divider from "@mui/material/Divider";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import Typography from "@mui/material/Typography";
-
+import * as XLSX from 'xlsx';
 import Swal from "sweetalert2";
 import Modal from '@mui/material/Modal';
 import Box from "@mui/material/Box";
 import Splitbtn from '../../Components/Splitbtn';
 import AddMerchants from './AddMerchants';
-
+import InputLabel from '@mui/material/InputLabel';
 const style = {
     position: 'absolute',
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: '70%',
-    height:'80%',
+    height: '80%',
     bgcolor: 'background.paper',
     border: '2px solid #000',
-    overflow:'scroll',
+    overflow: 'scroll',
     boxShadow: 24,
     p: 4,
 };
@@ -134,46 +135,48 @@ export default function MerchantsList() {
             }
         });
     };
-    const tableRef = useRef(null);
-    const { onDownload } = useDownloadExcel({
-        currentTableRef: tableRef.current,
-        filename: "All Merchant Data.xls",
-        sheet: "All Merchant Data.xls",
-    });
 
     const viewAll = (item) => {
         setCurrentMerchant(item);
         setview(true);
     }
-    const file_type = ['application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application/vnd.ms-excel']
-    const handlechange = (e) => {
-        const selected_file = e.target.files[0];
-        if (selected_file) {
-            if (selected_file && file_type.includes(selected_file.type)) {
-                let reader = new FileReader();
-                reader.onload = (e) => {
-                    const workbook = read(e.target.result);
-                    const sheet = workbook.SheetNames;
-                    if (
-                        sheet.length
-                    ) {
-                        const data = utils.sheet_to_json(workbook.Sheets[sheet[0]]);
-                        console.log(data)
-                        setmerchants(merchants => merchants.concat(data))
 
-                    }
-                }
-                reader.readAsArrayBuffer(selected_file)
-            } else {
 
-                setExcelData([])
-            }
-        }
-    }
+    const exportToExcel = async () => {
+        const res = axios.get('https://exuberant-fatigues-jay.cyclic.app/SinghTek/allWithdrawals', {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDc1Y2ZmMDAzOWM1NDMzMjhhMmQyZWIiLCJpYXQiOjE2ODYwMzUwNjd9.Qy2kZX2qHXSA5_-H4SVgsKxWqgji1Eyw6CtTjEvR-0Y'
+            },
+        })
+        const result = await res;
+        const data = result.data;
+
+        console.log(data)
+        const fieldsToExport = data.map(item => {
+            return {
+                beneficiary_name: item.beneficiary_name,
+                credit_account_no: item.credit_account_no,
+                beneficiary_branch_code: item.beneficiary_branch_code,
+                amount: item.amount,
+                bank_status: item.bank_status,
+                remarks_1: item.remarks_1,
+                utr_number: item.utr_number
+            };
+        });
+        const worksheet = XLSX.utils.json_to_sheet(fieldsToExport);
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, 'Data');
+        const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+
+        const blob = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+
+        saveAs(blob, 'data.xlsx');
+    };
+
     return (
         <>
             <div>
-                {/* <Button onClick={handleOpen}>Open modal</Button> */}
                 <Modal
                     open={open}
                     onClose={handleClose}
@@ -181,7 +184,7 @@ export default function MerchantsList() {
                     aria-describedby="modal-modal-description"
                 >
                     <Box sx={style}>
-                      <AddMerchants closeEvent={handleClose}/>
+                        <AddMerchants closeEvent={handleClose} />
                     </Box>
                 </Modal>
             </div>
@@ -222,7 +225,7 @@ export default function MerchantsList() {
                 </Stack>
                 <Box height={10} />
                 <TableContainer sx={{ maxHeight: 440 }}>
-                    <Table stickyHeader aria-label="sticky table" ref={tableRef}>
+                    <Table stickyHeader aria-label="sticky table" >
                         <TableHead>
                             <TableRow>
 
@@ -321,10 +324,25 @@ export default function MerchantsList() {
                     onPageChange={handleChangePage}
                     onRowsPerPageChange={handleChangeRowsPerPage}
                 />
+                <Box sx={{ flexGrow: 1 }}>
+                    <Grid container spacing={2}>
+                        <Grid item xs={6}>
+                            <InputLabel id="demo-simple-select-label" sx={{ ml: 3, md: 1 }} >Upload</InputLabel>
+                            <TextField
+                                name="upload-photo"
+                                type="file" sx={{ mb: 3, ml: 3 }} align="right"
+                            />
+                        </Grid>
+                        <Grid item xs={6}>
+                            <Stack spacing={2} direction="row" sx={{ ml: 3, mb: 3, mt: 4 }}>
+                                <Button variant="contained" onClick={exportToExcel}>Export Withdrawal Reqest</Button>
+                            </Stack>
+                        </Grid>
 
-                <Stack spacing={2} direction="row" sx={{ ml: 3, mb: 3 }}>
-                    <Button variant="contained" onClick={onDownload} >Export Merchants Details</Button>
-                </Stack>
+                    </Grid>
+                </Box>
+
+
             </Paper>
         </>
 

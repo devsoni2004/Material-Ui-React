@@ -3,6 +3,7 @@ import SideNav from '../Components/Sidenav'
 import Box from '@mui/material/Box';
 import Navbar from '../Components/Navbar';
 import MerchantsList from './Merchants/MerchantsList';
+import Skeleton from '@mui/material/Skeleton';
 const AllMerchantsData = () => {
     return (
         <>

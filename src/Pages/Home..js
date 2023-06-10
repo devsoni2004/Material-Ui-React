@@ -1,6 +1,6 @@
 import React from 'react'
 import Sidenav from '../Components/Sidenav'
-import Accordian from '../Components/Accordian'
+// import Accordian from '../Components/Accordian'
 import Box from '@mui/material/Box';
 import Navbar from '../Components/Navbar'
 import Grid from '@mui/material/Grid';
@@ -110,7 +110,7 @@ const Home = () => {
                                             <span className="payout-title">Payout Details</span>
                                             <br />
                                         </div>
-                                        <Accordian />
+                                        {/* <Accordian /> */}
                                         <PieCharts />
                                     </CardContent>
                                 </Card>

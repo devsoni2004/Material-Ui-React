@@ -4,12 +4,13 @@
 
 .price-title {
     font-weight: 600;
-    color: #fff;
+    color: #757575;
 }
 
 .sub-title {
-    font-size: 14px;
-    color: #fff;
+    font-size: 20px;
+    color: #000;
+    font-weight: 500;
 }
 
 .icon-style {
@@ -18,18 +19,11 @@
 }
 
 .gradient {
-    background: rgb(40, 34, 70);
-    background: linear-gradient(90deg, hsla(213, 77%, 14%, 1) 0%, hsla(202, 27%, 45%, 1) 100%);
+    background-color: #F3F6F9 !important;
 }
 
-.gradient2 {
-    background: rgb(40, 34, 70);
-    background: linear-gradient(90deg, hsla(350, 73%, 44%, 1) 0%, hsla(274, 65%, 12%, 1) 100%);
-}
-
-.gradient3 {
-    background: rgb(40, 34, 70);
-    background: linear-gradient(90deg, hsla(0, 0%, 37%, 1) 0%, hsla(59, 30%, 49%, 1) 100%);
+.active-link {
+    color: #009cff;
 }
 
 .bgcolor {
@@ -51,10 +45,10 @@
 } */
 
 
-.custom-spacing{
+.custom-spacing {
     margin-bottom: 10px;
 }
 
-.sidebg{
+.sidebg {
     background-color: red;
 }

@@ -39,7 +39,7 @@ export default function SplitButton() {
 
     return (
         <React.Fragment>
-            <ButtonGroup variant="contained" ref={anchorRef} aria-label="split button">
+            <ButtonGroup variant="contained" ref={anchorRef} aria-label="split button" color="success"  >
                 <Button onClick={handleClick}>{options[selectedIndex]}</Button>
                 <Button
                     size="small"
@@ -60,7 +60,7 @@ export default function SplitButton() {
                 anchorEl={anchorRef.current}
                 role={undefined}
                 transition
-                    Portal
+                Portal
             >
                 {({ TransitionProps, placement }) => (
                     <Grow

@@ -15,9 +15,8 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import Person3Icon from '@mui/icons-material/Person3';
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useLocation } from "react-router-dom"
 import { useAppStore } from '../appStore';
-
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -70,15 +69,22 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 export default function SideNav() {
     const theme = useTheme();
     const navigate = useNavigate();
+    const location = useLocation();
+    const activeLink = location.pathname;
+
+    const handleNavigation = (link) => {
+        navigate(link);
+    };
+
     const updateOpen = useAppStore((state) => state.updateOpen);
     const open = useAppStore((state) => state.dopen);
     return (
-        
+
         <Box sx={{ display: 'flex' }} >
             <CssBaseline />
-            <Box height={30} sx={{backgroundColor:'red'}}/>
+            <Box height={30} sx={{ backgroundColor: 'red' }} />
             <Drawer variant="permanent" open={open} >
-                <DrawerHeader > 
+                <DrawerHeader >
                     <IconButton>
                         {theme.direction === "rtl" ? (
                             <ChevronRightIcon />
@@ -88,70 +94,66 @@ export default function SideNav() {
                     </IconButton>
                 </DrawerHeader>
                 <Divider />
-                <List >
-                    <ListItem disablePadding sx={{ display: 'block' }} onClick={() => { navigate("/") }}>
+                <List>
+                    <ListItem disablePadding sx={{ display: 'block' }}>
                         <ListItemButton
                             sx={{
                                 minHeight: 48,
-                                justifyContent: open ? 'initial' : 'center',
+                                justifyContent: 'center',
                                 px: 2.5,
+                                color: activeLink === '/' ? 'blue' : 'inherit', // Set background color based on activeLink
+                                '&:hover': {
+                                    color: 'blue',
+                                },
                             }}
+                            onClick={() => handleNavigation("/")}
                         >
-                            <ListItemIcon
-                                sx={{
-                                    minWidth: 0,
-                                    mr: open ? 3 : 'auto',
-                                    justifyContent: 'center',
-                                }}
-                            >
+                            <ListItemIcon>
                                 <InboxIcon />
                             </ListItemIcon>
-                            <ListItemText primary="Dashboard" sx={{ opacity: open ? 1 : 0 }} />
+                            <ListItemText primary="Dashboard" />
                         </ListItemButton>
                     </ListItem>
-                    <ListItem disablePadding sx={{ display: 'block' }} onClick={() => { navigate("/AllMerchantsData") }}>
+                    <ListItem disablePadding sx={{ display: 'block' }}>
                         <ListItemButton
                             sx={{
                                 minHeight: 48,
-                                justifyContent: open ? 'initial' : 'center',
+                                justifyContent: 'center',
                                 px: 2.5,
+                                color: activeLink === '/AllMerchantsData' ? 'blue' : 'inherit', // Set background color based on activeLink
+
                             }}
+                            onClick={() => handleNavigation("/AllMerchantsData")}
                         >
-                            <ListItemIcon
-                                sx={{
-                                    minWidth: 0,
-                                    mr: open ? 3 : 'auto',
-                                    justifyContent: 'center',
-                                }}
-                            >
+                            <ListItemIcon>
                                 <Person3Icon />
                             </ListItemIcon>
-                            <ListItemText primary="All Merchants Data" sx={{ opacity: open ? 1 : 0 }} />
+                            <ListItemText primary="All Merchants Data" />
                         </ListItemButton>
                     </ListItem>
-                    <ListItem disablePadding sx={{ display: 'block' }} onClick={() => { navigate("/AcceptUsers") }}>
+                    <ListItem disablePadding sx={{ display: 'block' }}>
                         <ListItemButton
                             sx={{
                                 minHeight: 48,
-                                justifyContent: open ? 'initial' : 'center',
+                                justifyContent: 'center',
                                 px: 2.5,
+                                color: activeLink === '/SucessHistory' ? 'blue' : 'inherit', // Set background color based on activeLink
+                                '&:hover': {
+                                    color: 'blue',
+                                },
                             }}
+                            onClick={() => handleNavigation("/SucessHistory")}
                         >
-                            <ListItemIcon
-                                sx={{
-                                    minWidth: 0,
-                                    mr: open ? 3 : 'auto',
-                                    justifyContent: 'center',
-                                }}
-                            >
+                            <ListItemIcon>
                                 <CheckCircleOutlineIcon />
                             </ListItemIcon>
-                            <ListItemText primary="Accept Users" sx={{ opacity: open ? 1 : 0 }} />
+                            <ListItemText primary="Sucess history" />
                         </ListItemButton>
                     </ListItem>
                 </List>
+
                 <Divider />
             </Drawer>
-        </Box>
+        </Box >
     );
 }

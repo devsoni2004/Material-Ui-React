@@ -5,8 +5,6 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
-// import { useDownloadExcel } from 'react-export-table-to-excel'
-// import { useRef } from 'react'
 import { saveAs } from 'file-saver';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
@@ -21,6 +19,7 @@ import TextField from "@mui/material/TextField";
 import Divider from "@mui/material/Divider";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import Typography from "@mui/material/Typography";
+import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import * as XLSX from 'xlsx';
 import Swal from "sweetalert2";
 import Modal from '@mui/material/Modal';
@@ -28,6 +27,10 @@ import Box from "@mui/material/Box";
 import Splitbtn from '../../Components/Splitbtn';
 import AddMerchants from './AddMerchants';
 import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+
 const style = {
     position: 'absolute',
     top: '50%',
@@ -77,24 +80,26 @@ const columns = [
 
 ];
 
-function createData(name, code, population, size) {
-    const density = population / size;
-    return { name, code, population, size, density };
-}
+
 
 export default function MerchantsList() {
+    const [age, setAge] = useState('');
+
+    const handleChange = (event) => {
+        setAge(event.target.value);
+    };
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
-
     const [merchants, setmerchants] = useState([]);
     const [search, setSearch] = useState('');
     const [currentMerchant, setCurrentMerchant] = useState(null);
     const [ExcelData, setExcelData] = useState([]);
     const [view, setview] = useState(false);
 
-    const [open, setOpen] = React.useState(false);
+    let [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
     };
@@ -188,7 +193,7 @@ export default function MerchantsList() {
                     </Box>
                 </Modal>
             </div>
-            <Paper sx={{ width: '80%', overflow: 'hidden', marginLeft: '60px' }}>
+            <Paper sx={{ width: '80%', overflow: 'hidden', marginLeft: '60px', backgroundColor: "#F3F6F9" }}  >
 
                 <Typography
                     gutterBottom
@@ -198,35 +203,79 @@ export default function MerchantsList() {
                 >
                     All Merchants Data
                 </Typography>
-                <Box
-                    component="form"
-                    sx={{
-                        '& > :not(style)': { m: 1, width: '25ch' },
-                    }}
-                    noValidate
-                    autoComplete="off"
 
-                >
-                    <TextField id="outlined-basic" label="Search" variant="outlined" onChange={(e) => setSearch(e.target.value)} />
+                <Grid container spacing={2}>
+                    <Grid item xs={4}>
+                        <Box
+                            component="form"
+                            sx={{
+                                '& > :not(style)': { m: 1, width: '80%' },
+                            }}
+                            noValidate
+                            autoComplete="off"
 
-                </Box>
-                <Divider />
-                <Box height={10} />
-                <Stack direction="row" spacing={2} className="my-2 mb-2">
+                        >
+                            <TextField id="outlined-basic" label="Search" variant="outlined" onChange={(e) => setSearch(e.target.value)} />
 
-                    <Typography
-                        variant="h6"
-                        component="div"
-                        sx={{ flexGrow: 1 }}
-                    ></Typography>
-                    <Button variant="contained" endIcon={<AddCircleIcon />} onClick={handleOpen}>
-                        Add
-                    </Button>
-                </Stack>
-                <Box height={10} />
-                <TableContainer sx={{ maxHeight: 440 }}>
+                        </Box>
+                    </Grid>
+                    <Grid item xs={4}>
+                        <FormControl fullWidth sx={{
+                            m: 1
+                        }}>
+                            <InputLabel id="demo-simple-select-label">Filter Merchant</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                value={age}
+                                label="Filter Merchant"
+                                onChange={handleChange}
+                            >
+                                <MenuItem value={10}>Ten</MenuItem>
+                                <MenuItem value={20}>Twenty</MenuItem>
+                                <MenuItem value={30}>Thirty</MenuItem>
+                            </Select>
+                        </FormControl>
+                    </Grid>
+                    <Grid item xs={4}>
+                        <Stack direction="row" spacing={2}  >
+
+                            <Typography
+                                variant="h6"
+                                component="div"
+                                sx={{ flexGrow: 1 }}
+                            ></Typography>
+                            <Button variant="contained" endIcon={<AddCircleIcon />} onClick={handleOpen} sx={{
+                                width: "50%", right: "40%", top: "10px"
+                            }}>
+                                Add Merchant
+                            </Button>
+                        </Stack>
+                    </Grid>
+                </Grid>
+
+
+                <Grid container spacing={2}>
+                    <Grid item xs={6}>
+                        <InputLabel id="demo-simple-select-label" sx={{ ml: 3, md: 1, mt:3 }} >Upload</InputLabel>
+                        <TextField
+                            name="upload-photo"
+                            type="file" sx={{ mb: 3, ml: 3 }} align="right"
+                        />
+                    </Grid>
+
+                    <Grid item >
+                        <Stack spacing={2} direction="row" sx={{ ml: 3, mb: 3, mt: 7 }}>
+                            <Button variant="contained" onClick={exportToExcel}>Export Withdrawal Reqest</Button>
+                        </Stack>
+                    </Grid>
+                </Grid>
+                <Divider   />
+                <Box height={30} />
+
+                <TableContainer sx={{ maxHeight: 440, }} >
                     <Table stickyHeader aria-label="sticky table" >
-                        <TableHead>
+                        <TableHead sx={{ backgroundColor: "#F3F6F9" }} >
                             <TableRow>
 
                                 <TableCell align="left" style={{ minWidth: "100px" }}>
@@ -283,7 +332,7 @@ export default function MerchantsList() {
                                             </TableCell>
                                             <TableCell align="left">
                                                 <Stack direction="row">
-                                                    <Button variant="contained" onClick={() => viewAll(true)}>View All</Button>
+                                                    <Button variant="contained" >View All</Button>
                                                 </Stack>
                                             </TableCell>
                                             <TableCell align="left">
@@ -307,6 +356,7 @@ export default function MerchantsList() {
                                                             deleteUser(item.singhtek_id);
                                                         }}
                                                     />
+                                                    <RemoveRedEyeIcon />
                                                 </Stack>
                                             </TableCell>
                                         </TableRow>
@@ -324,23 +374,7 @@ export default function MerchantsList() {
                     onPageChange={handleChangePage}
                     onRowsPerPageChange={handleChangeRowsPerPage}
                 />
-                <Box sx={{ flexGrow: 1 }}>
-                    <Grid container spacing={2}>
-                        <Grid item xs={6}>
-                            <InputLabel id="demo-simple-select-label" sx={{ ml: 3, md: 1 }} >Upload</InputLabel>
-                            <TextField
-                                name="upload-photo"
-                                type="file" sx={{ mb: 3, ml: 3 }} align="right"
-                            />
-                        </Grid>
-                        <Grid item xs={6}>
-                            <Stack spacing={2} direction="row" sx={{ ml: 3, mb: 3, mt: 4 }}>
-                                <Button variant="contained" onClick={exportToExcel}>Export Withdrawal Reqest</Button>
-                            </Stack>
-                        </Grid>
 
-                    </Grid>
-                </Box>
 
 
             </Paper>

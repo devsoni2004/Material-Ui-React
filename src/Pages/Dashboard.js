@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{ useContext } from 'react'
 import Sidenav from '../Components/Sidenav'
 import Accordian from '../Components/Accordian'
 import Box from '@mui/material/Box';
@@ -15,7 +15,11 @@ import Barcharts from '../Charts/Barcharts';
 import PieCharts from '../Charts/PieCharts';
 import CountUp from 'react-countup';
 import "../Dasboard.css";
+import { AppContext } from '../context/AppContext';
+
 const Dashboard = () => {
+  const { appState } = useContext(AppContext);
+  console.log("Dashboard:", appState);
   return (
     <React.Fragment>
       <Box component="main" sx={{ flexGrow: 10, p: 2 }}>

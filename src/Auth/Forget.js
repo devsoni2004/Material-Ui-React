@@ -1,10 +1,9 @@
 import React from 'react'
-import { Grid, Paper, Avatar, TextField, Button, Typography, Link } from '@mui/material'
+import { Grid, Paper, Avatar, TextField, Button, Typography } from '@mui/material/'
 import LockIcon from '@mui/icons-material/Lock';
-import FormGroup from '@mui/material/FormGroup';
-import Checkbox from '@mui/material/Checkbox';
-const Forget = () => {
+import { Link } from 'react-router-dom';
 
+const Forget = () => {
     const paperStyle = { padding: 20, height: '70vh', width: 500, margin: "20px auto" }
     const avatarStyle = { backgroundColor: '#1bbd7e' }
     const customspacing = {}
@@ -17,19 +16,12 @@ const Forget = () => {
                     <h2>Forget Password</h2>
                 </Grid>
                 <TextField label='Username' placeholder='Enter username' fullWidth required style={customspacing} sx={{ pb: 3 }} />
-                <FormGroup
-                    control={
-                        <Checkbox
-                            name="checkedB"
-                            color="primary"
-                        />
-                    }
-                    label="Remember me"
-                />
+  
                 <Button type='submit' color='primary' variant="contained" style={btnstyle} fullWidth>Submit</Button>
-                <Typography sx={{ mt: 3 }} > Do you have an account ?
-                    <Link sx={{ ml: 2 }} to="/register" >
-                        Sign Up
+
+                <Typography sx={{ mt:1, display: 'flex', justifyContent: 'center' }}>Do you have an account?&nbsp;
+                    <Link to="/login" >
+                        Sign In
                     </Link>
                 </Typography>
             </Paper>

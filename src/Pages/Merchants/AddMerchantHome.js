@@ -43,7 +43,7 @@ const AddMerchantHome = () => {
                                                         id="demo-simple-select"
                                                         value={age}
                                                         label="Merchant"
-                                                        onChange={handleChange}
+                                                        onChange={handleChange} sx={{ height: "45px" }}
                                                     >
                                                         <MenuItem value={10}>Ten</MenuItem>
                                                         <MenuItem value={20}>Twenty</MenuItem>
@@ -54,17 +54,18 @@ const AddMerchantHome = () => {
                                         </Grid>
                                         <Grid item xs={3}>
                                             <Box height={7} />
+                                            <Box sx={{ height: "45px" }}>
+                                                <Box
+                                                    component="form"
+                                                    sx={{
+                                                        '& > :not(style)': { m: 1, width: '100%', },
+                                                    }}
+                                                    noValidate
+                                                    autoComplete="off"
+                                                >
+                                                    <TextField id="outlined-basic" label="Dealer Code" variant="outlined" />
 
-                                            <Box
-                                                component="form"
-                                                sx={{
-                                                    '& > :not(style)': { m: 1, width: '100%' },
-                                                }}
-                                                noValidate
-                                                autoComplete="off"
-                                            >
-                                                <TextField id="outlined-basic" label="Dealer Code" variant="outlined" />
-
+                                                </Box>
                                             </Box>
                                         </Grid>
                                         <Grid item xs={3}>
@@ -84,7 +85,7 @@ const AddMerchantHome = () => {
                                         <Grid item xs={3}>
                                             <Box height={22} />
                                             <Stack spacing={2} direction="row">
-                                                <Button variant="contained" sx={{ ml:"28%" }}>Add merchant</Button>
+                                                <Button variant="contained" sx={{ ml: "28%" }}>Add merchant</Button>
                                             </Stack>
                                         </Grid>
                                     </Grid>

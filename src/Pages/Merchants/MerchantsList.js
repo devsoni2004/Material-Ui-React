@@ -205,7 +205,7 @@ export default function MerchantsList() {
                 </Typography>
 
                 <Grid container spacing={2}>
-                    <Grid item xs={4}>
+                    <Grid item xs={3}>
                         <Box
                             component="form"
                             sx={{
@@ -219,7 +219,7 @@ export default function MerchantsList() {
 
                         </Box>
                     </Grid>
-                    <Grid item xs={4}>
+                    <Grid item xs={3}>
                         <FormControl fullWidth sx={{
                             m: 1
                         }}>
@@ -229,7 +229,7 @@ export default function MerchantsList() {
                                 id="demo-simple-select"
                                 value={age}
                                 label="Filter Merchant"
-                                onChange={handleChange}
+                                onChange={handleChange} sx={{ height: "45px" }}
                             >
                                 <MenuItem value={10}>Ten</MenuItem>
                                 <MenuItem value={20}>Twenty</MenuItem>
@@ -237,7 +237,7 @@ export default function MerchantsList() {
                             </Select>
                         </FormControl>
                     </Grid>
-                    <Grid item xs={4}>
+                    <Grid item xs={3}>
                         <Stack direction="row" spacing={2}  >
 
                             <Typography
@@ -252,25 +252,24 @@ export default function MerchantsList() {
                             </Button>
                         </Stack>
                     </Grid>
-                </Grid>
-
-
-                <Grid container spacing={2}>
-                    <Grid item xs={6}>
-                        <InputLabel id="demo-simple-select-label" sx={{ ml: 3, md: 1, mt:3 }} >Upload</InputLabel>
+                    <Grid item xs={3}>
+                        <Stack spacing={2} direction="row" sx={{ ml: 0, mb: 0, mt: 1 }}>
+                            <Button variant="contained" onClick={exportToExcel}>Export Withdrawal Reqest</Button>
+                        </Stack>
+                    </Grid>
+                    <Grid item xs={3}>
+                        <InputLabel id="demo-simple-select-label" sx={{ ml: 3, md: 0, mt: 0 }} >Upload</InputLabel>
                         <TextField
                             name="upload-photo"
                             type="file" sx={{ mb: 3, ml: 3 }} align="right"
                         />
                     </Grid>
-
-                    <Grid item >
-                        <Stack spacing={2} direction="row" sx={{ ml: 3, mb: 3, mt: 7 }}>
-                            <Button variant="contained" onClick={exportToExcel}>Export Withdrawal Reqest</Button>
-                        </Stack>
-                    </Grid>
                 </Grid>
-                <Divider   />
+
+
+
+
+                <Divider />
                 <Box height={30} />
 
                 <TableContainer sx={{ maxHeight: 440, }} >
@@ -291,11 +290,12 @@ export default function MerchantsList() {
                                     Mobile No.
                                 </TableCell>
                                 <TableCell align="left" style={{ minWidth: "100px" }}>
-                                    Status
+                                    Txn Limit
                                 </TableCell>
                                 <TableCell align="left" style={{ minWidth: "100px" }}>
-                                    View Transaction
+                                    Status
                                 </TableCell>
+
                                 <TableCell align="left" style={{ minWidth: "100px" }}>
                                     Action
                                 </TableCell>
@@ -323,16 +323,15 @@ export default function MerchantsList() {
                                             <TableCell key={item.mobile} align="left">
                                                 {item.mobile}
                                             </TableCell>
+
+                                            <TableCell key={item.transaction_limit} align="left">
+                                                {item.transaction_limit}
+                                            </TableCell>
                                             <TableCell align="left">
                                                 <Stack direction="row" className="btn-outer">
                                                     <Button>
                                                         <Splitbtn />
                                                     </Button>
-                                                </Stack>
-                                            </TableCell>
-                                            <TableCell align="left">
-                                                <Stack direction="row">
-                                                    <Button variant="contained" >View All</Button>
                                                 </Stack>
                                             </TableCell>
                                             <TableCell align="left">
@@ -377,7 +376,7 @@ export default function MerchantsList() {
 
 
 
-            </Paper>
+            </Paper >
         </>
 
     );

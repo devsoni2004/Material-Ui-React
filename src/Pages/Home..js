@@ -21,11 +21,11 @@ const Home = () => {
         <>
             <div className="bgcolor">
                 <Navbar />
-                <Box height={50} />
+                <Box height={20} />
                 <Box sx={{ display: 'flex' }}>
                     <Sidenav sx={{ mt: '34' }} />
 
-                    <Box component="main" sx={{ flexGrow: 10, p: 5 }}>
+                    <Box component="main" sx={{ flexGrow: 14, p: 5 }}>
                         <Box height={20} />
                         <Grid container spacing={2}>
                             <Grid item xs={8}>
@@ -54,7 +54,7 @@ const Home = () => {
                                             <Typography gutterBottom variant="body2" component="div" sx={{ color: "#000", fontWeight: '500' }}>
                                                 Withdrawal Requests
                                             </Typography>
-                                            <Typography gutterBottom variant="h5" component="div" sx={{ color: "#000", fontWeight: 'bold' }}>
+                                            <Typography gutterBottom variant="h5" component="div" sx={{ color: "#000", fontWeight: '500' }}>
                                                 <CountUp delay={0.4} end={2000} duration={0.6} />
                                             </Typography>
                                         </CardContent>

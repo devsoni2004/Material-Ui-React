@@ -1,11 +1,9 @@
 import * as React from 'react';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import { useDemoData } from '@mui/x-data-grid-generator';
-import Navbar from '../Components/Navbar';
-import SideNav from '../Components/Sidenav';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-
+import Typography from "@mui/material/Typography";
 export default function SucessHistory() {
     const { data } = useDemoData({
         dataSet: 'Commodity',
@@ -83,15 +81,22 @@ export default function SucessHistory() {
 
     return (
         <div style={{ height: 500, width: '98%' }}>
-            <Navbar />
-            <SideNav />
+        
+            <Typography
+                gutterBottom
+                variant="h5"
+                component="div"
+                sx={{ mt: "3%", ml: "15%" }}
+            >
+                All Sucess History
+            </Typography>
             <DataGrid
                 columns={columns}
                 rows={rows}
                 components={{
                     Toolbar: GridToolbar,
                 }}
-                sx={{ ml: '15%', mt: '3%' }}
+                sx={{ ml: '15%', mt:"22px", backgroundColor: "#F3F6F9" }}
             />
         </div>
     );

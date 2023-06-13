@@ -15,7 +15,9 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import Person3Icon from '@mui/icons-material/Person3';
+import PendingIcon from '@mui/icons-material/Pending';
 import { useNavigate, useLocation } from "react-router-dom"
+import CancelIcon from '@mui/icons-material/Cancel';
 import { useAppStore } from '../appStore';
 const drawerWidth = 240;
 
@@ -100,7 +102,8 @@ export default function SideNav() {
                             sx={{
                                 minHeight: 48,
                                 justifyContent: 'center',
-                                px: 2.5,
+                                px: 2.5, 
+                                ml: "8px",
                                 color: activeLink === '/' ? 'blue' : 'inherit', // Set background color based on activeLink
                                 '&:hover': {
                                     color: 'blue',
@@ -109,7 +112,9 @@ export default function SideNav() {
                             onClick={() => handleNavigation("/")}
                         >
                             <ListItemIcon>
-                                <InboxIcon />
+                                <InboxIcon sx={{
+                                    ml: "18px"
+                                }} />
                             </ListItemIcon>
                             <ListItemText primary="Dashboard" />
                         </ListItemButton>
@@ -118,6 +123,7 @@ export default function SideNav() {
                         <ListItemButton
                             sx={{
                                 minHeight: 48,
+                                ml: "8px",
                                 justifyContent: 'center',
                                 px: 2.5,
                                 color: activeLink === '/AllMerchantsData' ? 'blue' : 'inherit', // Set background color based on activeLink
@@ -126,7 +132,9 @@ export default function SideNav() {
                             onClick={() => handleNavigation("/AllMerchantsData")}
                         >
                             <ListItemIcon>
-                                <Person3Icon />
+                                <Person3Icon sx={{
+                                    ml: "18px"
+                                }} />
                             </ListItemIcon>
                             <ListItemText primary="All Merchants Data" />
                         </ListItemButton>
@@ -136,7 +144,7 @@ export default function SideNav() {
                             sx={{
                                 minHeight: 48,
                                 justifyContent: 'center',
-                                px: 2.5,
+                                px: 2.5,  ml: "8px",
                                 color: activeLink === '/SucessHistory' ? 'blue' : 'inherit', // Set background color based on activeLink
                                 '&:hover': {
                                     color: 'blue',
@@ -145,9 +153,53 @@ export default function SideNav() {
                             onClick={() => handleNavigation("/SucessHistory")}
                         >
                             <ListItemIcon>
-                                <CheckCircleOutlineIcon />
+                                <CheckCircleOutlineIcon sx={{
+                                    ml: "18px"
+                                }} />
                             </ListItemIcon>
                             <ListItemText primary="Sucess history" />
+                        </ListItemButton>
+                    </ListItem>
+                    <ListItem disablePadding sx={{ display: 'block' }}>
+                        <ListItemButton
+                            sx={{
+                                minHeight: 48,  ml: "8px",
+                                justifyContent: 'center',
+                                px: 2.5,
+                                color: activeLink === '/PendingHistory' ? 'blue' : 'inherit', // Set background color based on activeLink
+                                '&:hover': {
+                                    color: 'blue',
+                                },
+                            }}
+                            onClick={() => handleNavigation("/PendingHistory")}
+                        >
+                            <ListItemIcon>
+                                <PendingIcon sx={{
+                                    ml: "18px"
+                                }} />
+                            </ListItemIcon>
+                            <ListItemText primary="Pending history" />
+                        </ListItemButton>
+                    </ListItem>
+                    <ListItem disablePadding sx={{ display: 'block' }}>
+                        <ListItemButton
+                            sx={{
+                                minHeight: 48,  ml: "8px",
+                                justifyContent: 'center',
+                                px: 2.5,
+                                color: activeLink === '/FailedHistory' ? 'blue' : 'inherit', // Set background color based on activeLink
+                                '&:hover': {
+                                    color: 'blue',
+                                },
+                            }}
+                            onClick={() => handleNavigation("/FailedHistory")}
+                        >
+                            <ListItemIcon>
+                                <CancelIcon sx={{
+                                    ml: "18px"
+                                }} />
+                            </ListItemIcon>
+                            <ListItemText primary="Failed history" />
                         </ListItemButton>
                     </ListItem>
                 </List>

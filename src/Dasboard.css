@@ -3,23 +3,19 @@
 }
 
 .price-title {
-    font-weight: 600;
+    font-weight: 500;
     color: #757575;
 }
 
 .sub-title {
     font-size: 20px;
     color: #000;
-    font-weight: 500;
+    font-weight: 400;
 }
 
 .icon-style {
     margin-top: 20px;
     margin-left: 20px;
-}
-
-.gradient {
-    background-color: #F3F6F9 !important;
 }
 
 .active-link {

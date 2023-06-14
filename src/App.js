@@ -9,6 +9,7 @@ import PendingHistory from "./Pages/PendingHistory";
 import FailedHistory from "./Pages/FailedHistory";
 import Navbar from "./Components/Navbar";
 import SideNav from "./Components/Sidenav";
+import { pages } from './common/constants'
 
 function App() {
   return (
@@ -17,10 +18,10 @@ function App() {
         <Navbar />
         <SideNav />
         <Routes>
-          <Route path="/" exact element={<Home />}></Route>
+          <Route path={pages.ROOT} exact element={<Home />}></Route>
           <Route path="/AllMerchantsData" exact element={<AllMerchantsData />}></Route>
-          <Route path="/SucessHistory" exact element={<SucessHistory />}></Route>
-          <Route path="/PendingHistory" exact element={<PendingHistory />}></Route>
+          <Route path={pages.SUCESS_HISTORY} exact element={<SucessHistory />}></Route>
+          <Route path={pages.PENDING_HISTORY} exact element={<PendingHistory />}></Route>
           <Route path="/FailedHistory" exact element={<FailedHistory />}></Route>
           <Route path="/Login" exact element={<Login />}></Route>
           <Route path="/Forget" exact element={<Forget />}></Route>

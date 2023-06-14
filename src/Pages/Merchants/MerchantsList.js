@@ -93,8 +93,8 @@ export default function MerchantsList() {
     const [merchants, setmerchants] = useState([]);
     const [search, setSearch] = useState('');
     const [currentMerchant, setCurrentMerchant] = useState(null);
-    const [ExcelData, setExcelData] = useState([]);
-    const [view, setview] = useState(false);
+    // const [ExcelData, setExcelData] = useState([]);
+    // const [view, setview] = useState(false);
 
     let [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
@@ -141,10 +141,6 @@ export default function MerchantsList() {
         });
     };
 
-    const viewAll = (item) => {
-        setCurrentMerchant(item);
-        setview(true);
-    }
 
 
     const exportToExcel = async () => {
@@ -231,9 +227,9 @@ export default function MerchantsList() {
                                 label="Filter Merchant"
                                 onChange={handleChange} sx={{ height: "45px" }}
                             >
-                                <MenuItem value={10}>Ten</MenuItem>
-                                <MenuItem value={20}>Twenty</MenuItem>
-                                <MenuItem value={30}>Thirty</MenuItem>
+                                <MenuItem value={10}>Allow</MenuItem>
+                                <MenuItem value={20}>Pending</MenuItem>
+                                <MenuItem value={30}>Cancel</MenuItem>
                             </Select>
                         </FormControl>
                     </Grid>

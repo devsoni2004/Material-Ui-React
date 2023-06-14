@@ -5,11 +5,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Typography from "@mui/material/Typography";
 export default function SucessHistory() {
-    const { data } = useDemoData({
-        dataSet: 'Commodity',
-        rowLength: 10,
-        maxColumns: 12,
-    });
+
     const [merchants, setMerchants] = useState([]);
 
     useEffect(() => {
@@ -81,7 +77,7 @@ export default function SucessHistory() {
 
     return (
         <div style={{ height: 500, width: '98%' }}>
-        
+
             <Typography
                 gutterBottom
                 variant="h5"
@@ -96,7 +92,7 @@ export default function SucessHistory() {
                 components={{
                     Toolbar: GridToolbar,
                 }}
-                sx={{ ml: '15%', mt:"22px", backgroundColor: "#F3F6F9" }}
+                sx={{ ml: '15%', mt: "22px ", backgroundColor: "#F3F6F9" }}
             />
         </div>
     );

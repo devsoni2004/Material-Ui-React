@@ -23,6 +23,8 @@ const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
     width: drawerWidth,
+    backgroundColor:'#448aff',
+    color:"#fff",
     transition: theme.transitions.create('width', {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.enteringScreen,
@@ -36,6 +38,8 @@ const closedMixin = (theme) => ({
         duration: theme.transitions.duration.leavingScreen,
     }),
     overflowX: 'hidden',
+    backgroundColor:'#448aff',
+    color:"#fff",
     width: `calc(${theme.spacing(7)} + 1px)`,
     [theme.breakpoints.up('sm')]: {
         width: `calc(${theme.spacing(8)} + 1px)`,
@@ -103,6 +107,7 @@ export default function SideNav() {
                                 minHeight: 48,
                                 justifyContent: 'center',
                                 px: 2.5, 
+                              
                                 ml: "8px",
                                 color: activeLink === '/' ? 'blue' : 'inherit', // Set background color based on activeLink
                                 '&:hover': {
@@ -113,7 +118,9 @@ export default function SideNav() {
                         >
                             <ListItemIcon>
                                 <InboxIcon sx={{
-                                    ml: "18px"
+                                    ml: "18px",
+                                    color: '#fff',
+                                    fontSize:"25px"
                                 }} />
                             </ListItemIcon>
                             <ListItemText primary="Dashboard" />
@@ -133,7 +140,9 @@ export default function SideNav() {
                         >
                             <ListItemIcon>
                                 <Person3Icon sx={{
-                                    ml: "18px"
+                                    ml: "18px",
+                                    color: '#fff',
+                                    fontSize:"25px"
                                 }} />
                             </ListItemIcon>
                             <ListItemText primary="All Merchants Data" />
@@ -154,7 +163,9 @@ export default function SideNav() {
                         >
                             <ListItemIcon>
                                 <CheckCircleOutlineIcon sx={{
-                                    ml: "18px"
+                                    ml: "18px",
+                                    color: '#fff',
+                                    fontSize:"25px"
                                 }} />
                             </ListItemIcon>
                             <ListItemText primary="Sucess history" />
@@ -175,7 +186,9 @@ export default function SideNav() {
                         >
                             <ListItemIcon>
                                 <PendingIcon sx={{
-                                    ml: "18px"
+                                    ml: "18px",
+                                    color: '#fff',
+                                    fontSize:"25px"
                                 }} />
                             </ListItemIcon>
                             <ListItemText primary="Pending history" />
@@ -196,7 +209,9 @@ export default function SideNav() {
                         >
                             <ListItemIcon>
                                 <CancelIcon sx={{
-                                    ml: "18px"
+                                    ml: "18px",
+                                    color: '#fff',
+                                    fontSize:"25px" 
                                 }} />
                             </ListItemIcon>
                             <ListItemText primary="Failed history" />

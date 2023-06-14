@@ -16,7 +16,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import { useAppStore } from '../appStore';
 import Logo from '../justapay.png'
-import { useState } from 'react';
+
 const AppBar = styled(MuiAppBar, {
 })(({ theme }) => ({
     zIndex: theme.zIndex.drawer + 1,
@@ -26,6 +26,7 @@ const AppBar = styled(MuiAppBar, {
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
+    
     backgroundColor: alpha(theme.palette.common.white, 0.15),
     '&:hover': {
         backgroundColor: alpha(theme.palette.common.white, 0.25),
@@ -44,6 +45,7 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
     height: '100%',
     position: 'absolute',
     pointerEvents: 'none',
+
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -51,6 +53,7 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
     color: 'inherit',
+    
     '& .MuiInputBase-input': {
         padding: theme.spacing(1, 1, 1, 0),
         // vertical padding + font size from searchIcon
@@ -167,7 +170,7 @@ export default function Navbar() {
 
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="fixed" sx={{ backgroundColor: "#F3F6F9 !important", color: "#2f2f2f" }}>
+            <AppBar position="fixed" sx={{ backgroundColor: "#448aff !important", color: "#fff" }}>
                 <Toolbar>
                     <IconButton
                         size="large"

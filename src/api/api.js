@@ -29,7 +29,7 @@ export const userAuthentication = async (data) => {
             return res;
         } catch (error) {
             console.error(error);
-            return "error";
+            return error;
         }
     }
     else if (data.userType === 2) {
@@ -40,8 +40,8 @@ export const userAuthentication = async (data) => {
             }
             return res;
         } catch (error) {
-            console.log(error);
-            return error.response.data;
+            console.error(error);
+            return error;
         }
     }
 };

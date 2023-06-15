@@ -37,6 +37,7 @@ export const AppContextProvider = ({ children }) => {
     const login = async (data) => {
         try {
             const result = await userAuthentication(data);
+            debugger;
             if (result !== "error") {
                 dispatch({
                     type: actionTypes.UPDATE_TOKEN,
@@ -47,7 +48,7 @@ export const AppContextProvider = ({ children }) => {
                 console.log(result);
             }
         } catch (err) {
-            console.log(err);
+            console.log(err.response);
         }
     }
     const logout = async () => {

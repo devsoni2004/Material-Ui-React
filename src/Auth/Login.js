@@ -51,7 +51,7 @@ const Login = () => {
                     value={values.email}
                     error={errors.email && touched.email}
                     helperText={errors.email}
-
+                    InputLabelProps={{ shrink: true }} 
                 />
                 <TextField name="password" label='Password' placeholder='Enter password' type='password' fullWidth required sx={{ pb: 3 }}
                     onChange={handleChange}
@@ -59,6 +59,7 @@ const Login = () => {
                     value={values.password}
                     error={errors.password && touched.password}
                     helperText={errors.password}
+                    InputLabelProps={{ shrink: true }} 
                 />
 
                 {/* <Grid item xs={4}>
@@ -96,8 +97,11 @@ const Login = () => {
                     </Typography>
                 </Stack>
                 <Button type='submit' color='primary' variant="contained" style={btnstyle} fullWidth onClick={handleSubmit}>Sign in</Button>
+                <div style={{textAlign:"center", color:'red'}}>
+                    {appState?.error}
+                </div>
                 <Typography sx={{ mt: 1, display: 'flex', justifyContent: 'center' }}>Do you have an account?&nbsp;
-                    <Link to="" >
+                    <Link to={pages.REGISTER} >
                         Sign Up
                     </Link>
                 </Typography>

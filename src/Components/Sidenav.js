@@ -17,6 +17,7 @@ import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import Person3Icon from '@mui/icons-material/Person3';
 import { useNavigate } from "react-router-dom"
 import { useAppStore } from '../appStore';
+import { pages } from '../common/constants';
 
 const drawerWidth = 240;
 
@@ -94,7 +95,7 @@ export default function SideNav() {
                 </DrawerHeader>
                 <Divider />
                 <List >
-                    <ListItem disablePadding sx={{ display: 'block' }} onClick={()=>navigateTo("/")}>
+                    <ListItem disablePadding sx={{ display: 'block' }} onClick={()=>navigateTo(pages.ROOT)}>
                         <ListItemButton
                             sx={{
                                 minHeight: 48,
@@ -114,7 +115,7 @@ export default function SideNav() {
                             <ListItemText primary="Dashboard" sx={{ opacity: open ? 1 : 0 }} />
                         </ListItemButton>
                     </ListItem>
-                    <ListItem disablePadding sx={{ display: 'block' }} onClick={()=>navigateTo("/AllMerchantsData")}>
+                    <ListItem disablePadding sx={{ display: 'block' }} onClick={()=>navigateTo(pages.ALL_MERCHANTS_DATA)}>
                         <ListItemButton
                             sx={{
                                 minHeight: 48,
@@ -134,7 +135,7 @@ export default function SideNav() {
                             <ListItemText primary="All Merchants Data" sx={{ opacity: open ? 1 : 0 }} />
                         </ListItemButton>
                     </ListItem>
-                    <ListItem disablePadding sx={{ display: 'block' }} onClick={()=>navigateTo("/AcceptUsers")}>
+                    <ListItem disablePadding sx={{ display: 'block' }} onClick={()=>navigateTo(pages.ACCEPT_USERS)}>
                         <ListItemButton
                             sx={{
                                 minHeight: 48,

@@ -15,6 +15,11 @@ function appStateReducer(state, action) {
             sessionStorage.setItem('appState', JSON.stringify(stateData))
             return stateData;
         }
+        case actionTypes.UPDATE_ERROR: {
+            const stateData = { ...state, error:action.payload }
+            sessionStorage.setItem('appState', JSON.stringify(stateData))
+            return stateData;
+        }
         case actionTypes.UPDATE_STATE: {
             const stateData = { ...state, ...action.payload }
             sessionStorage.setItem('appState', JSON.stringify(stateData))
@@ -42,12 +47,18 @@ export const AppContextProvider = ({ children }) => {
                     type: actionTypes.UPDATE_USER,
                     payload: result.data
                 })
+                dispatch({
+                    type: actionTypes.UPDATE_ERROR,
+                    payload: ""
+                })
                 navigate(pages.DASHBOARD);
-            } else {
-                console.log(result);
-            }
+            } 
         } catch (err) {
             console.log(err.response);
+            dispatch({
+                type: actionTypes.UPDATE_ERROR,
+                payload: err.response.data
+            })
         }
     }
     const logout = async () => {

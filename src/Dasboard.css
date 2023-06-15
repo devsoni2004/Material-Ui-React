@@ -4,12 +4,12 @@
 
 .price-title {
     font-weight: 600;
-    color: #fff;
+    color: #000;
 }
 
 .sub-title {
     font-size: 14px;
-    color: #fff;
+    color: #000;
 }
 
 .icon-style {
@@ -18,18 +18,7 @@
 }
 
 .gradient {
-    background: rgb(40, 34, 70);
-    background: linear-gradient(90deg, hsla(213, 77%, 14%, 1) 0%, hsla(202, 27%, 45%, 1) 100%);
-}
-
-.gradient2 {
-    background: rgb(40, 34, 70);
-    background: linear-gradient(90deg, hsla(350, 73%, 44%, 1) 0%, hsla(274, 65%, 12%, 1) 100%);
-}
-
-.gradient3 {
-    background: rgb(40, 34, 70);
-    background: linear-gradient(90deg, hsla(0, 0%, 37%, 1) 0%, hsla(59, 30%, 49%, 1) 100%);
+    background-color: #F3F6F9;
 }
 
 .bgcolor {
@@ -44,17 +33,39 @@
     color: #000;
 }
 
-/* .btn-outer {
-    margin-top: 15px;
+.date-pickup {
     display: flex;
-    justify-content: end;
-} */
+    background-color: #f2f2f2f2;
+    justify-content: center;
+    margin-top: 50px;
+    align-items: center;
+    padding-top: 15px;
+    padding-bottom: 20px;
+    margin-left: 20px;
+    width: 87%;
+}
 
+.widgets {
+    background-color: #f2f2f2f2;
+    margin-left: 15px;
+    margin-top: 15px;
+    width: 87%;
+    padding: 25px;
+    display: flex;
+}
 
-.custom-spacing{
+.custom-spacing {
     margin-bottom: 10px;
 }
 
-.sidebg{
+.sidebg {
     background-color: red;
+}
+
+.import-export {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-right: 15px;
 }

@@ -22,6 +22,8 @@ const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
     width: drawerWidth,
+    backgroundColor: '#111c43',
+    color: "#fff",
     transition: theme.transitions.create('width', {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.enteringScreen,
@@ -35,6 +37,8 @@ const closedMixin = (theme) => ({
         duration: theme.transitions.duration.leavingScreen,
     }),
     overflowX: 'hidden',
+    backgroundColor: '#111c43',
+    color: "#fff",
     width: `calc(${theme.spacing(7)} + 1px)`,
     [theme.breakpoints.up('sm')]: {
         width: `calc(${theme.spacing(8)} + 1px)`,
@@ -44,6 +48,7 @@ const closedMixin = (theme) => ({
 const DrawerHeader = styled('div')(({ theme }) => ({
     display: 'flex',
     alignItems: 'center',
+
     justifyContent: 'flex-end',
     padding: theme.spacing(0, 1),
     ...theme.mixins.toolbar,
@@ -53,6 +58,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
     ({ theme, open }) => ({
         width: drawerWidth,
+
         flexShrink: 0,
         whiteSpace: 'nowrap',
         boxSizing: 'border-box',
@@ -73,12 +79,12 @@ export default function SideNav() {
     const updateOpen = useAppStore((state) => state.updateOpen);
     const open = useAppStore((state) => state.dopen);
     return (
-        
+
         <Box sx={{ display: 'flex' }} >
             <CssBaseline />
-            <Box height={30} sx={{backgroundColor:'red'}}/>
-            <Drawer variant="permanent" open={open} >
-                <DrawerHeader > 
+            <Box height={30} sx={{ backgroundColor: 'red' }} />
+            <Drawer variant="permanent" open={open}>
+                <DrawerHeader >
                     <IconButton>
                         {theme.direction === "rtl" ? (
                             <ChevronRightIcon />
@@ -102,6 +108,7 @@ export default function SideNav() {
                                     minWidth: 0,
                                     mr: open ? 3 : 'auto',
                                     justifyContent: 'center',
+                                    color: "#fff"
                                 }}
                             >
                                 <InboxIcon />
@@ -109,12 +116,13 @@ export default function SideNav() {
                             <ListItemText primary="Dashboard" sx={{ opacity: open ? 1 : 0 }} />
                         </ListItemButton>
                     </ListItem>
-                    <ListItem disablePadding sx={{ display: 'block' }} onClick={() => { navigate("/AllMerchantsData") }}>
+                    <ListItem disablePadding sx={{ display: 'block' }} onClick={() => { navigate("/AllTransaction") }}>
                         <ListItemButton
                             sx={{
                                 minHeight: 48,
                                 justifyContent: open ? 'initial' : 'center',
                                 px: 2.5,
+                                color: "#fff"
                             }}
                         >
                             <ListItemIcon
@@ -122,11 +130,12 @@ export default function SideNav() {
                                     minWidth: 0,
                                     mr: open ? 3 : 'auto',
                                     justifyContent: 'center',
+                                    color: "#fff"
                                 }}
                             >
                                 <Person3Icon />
                             </ListItemIcon>
-                            <ListItemText primary="All Merchants Data" sx={{ opacity: open ? 1 : 0 }} />
+                            <ListItemText primary="All Transaction's" sx={{ opacity: open ? 1 : 0 }} />
                         </ListItemButton>
                     </ListItem>
                     <ListItem disablePadding sx={{ display: 'block' }} onClick={() => { navigate("/AcceptUsers") }}>
@@ -142,6 +151,7 @@ export default function SideNav() {
                                     minWidth: 0,
                                     mr: open ? 3 : 'auto',
                                     justifyContent: 'center',
+                                    color: "#fff"
                                 }}
                             >
                                 <CheckCircleOutlineIcon />

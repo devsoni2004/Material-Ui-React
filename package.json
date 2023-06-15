@@ -7,6 +7,9 @@
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.13.4",
+    "@mui/x-data-grid": "^6.7.0",
+    "@mui/x-data-grid-generator": "^6.7.0",
+    "@mui/x-date-pickers": "^6.7.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -16,6 +19,7 @@
     "react-auth-kit": "^2.12.2",
     "react-bootstrap": "^2.7.4",
     "react-countup": "^6.4.2",
+    "react-datepicker": "^4.13.0",
     "react-dom": "^18.2.0",
     "react-export-table-to-excel": "^1.0.6",
     "react-google-charts": "^4.0.0",
@@ -50,5 +54,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.3.2"
   }
 }

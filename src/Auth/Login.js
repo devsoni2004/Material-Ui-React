@@ -1,9 +1,9 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { Grid, Paper, Avatar, TextField, Button, Typography, FormControl, Select, MenuItem, InputLabel, FormControlLabel, Box, Stack, FormHelperText } from '@mui/material/'
 import LockIcon from '@mui/icons-material/Lock';
 import FormGroup from '@mui/material/FormGroup';
 import Checkbox from '@mui/material/Checkbox';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { pages, userTypes } from '../common/constants';
 import { AppContext } from '../context/AppContext'
 import { useFormik } from 'formik';
@@ -11,11 +11,12 @@ import { signInSchema } from '../schemas/yupSchema'
 const initialValues = {
     email: "",
     password: "",
-    userType: ""
+    // userType: ""
 };
 
 const Login = () => {
-    const { login } = useContext(AppContext);
+    const navigate = useNavigate();
+    const { appState, login } = useContext(AppContext);
     const paperStyle = { padding: 20, height: '70vh', width: 500, margin: "20px auto" }
     const avatarStyle = { backgroundColor: '#1bbd7e' }
     const customspacing = {}
@@ -32,6 +33,11 @@ const Login = () => {
         });
     console.log(errors,);
 
+    useEffect(() => {
+        if (appState?.user?.token) {
+            navigate(pages.DASHBOARD);
+        }
+    }, [])
     return (
         <Grid sx={{ mt: 10 }}>
             <Paper elevation={10} style={paperStyle} >
@@ -45,7 +51,7 @@ const Login = () => {
                     value={values.email}
                     error={errors.email && touched.email}
                     helperText={errors.email}
-                    
+
                 />
                 <TextField name="password" label='Password' placeholder='Enter password' type='password' fullWidth required sx={{ pb: 3 }}
                     onChange={handleChange}
@@ -55,7 +61,7 @@ const Login = () => {
                     helperText={errors.password}
                 />
 
-                <Grid item xs={4}>
+                {/* <Grid item xs={4}>
                     <FormControl fullWidth error={errors.userType && touched.userType}>
                         <InputLabel id="demo-simple-select-label">User Type</InputLabel>
                         <Select
@@ -78,7 +84,7 @@ const Login = () => {
                         </Select>
                         <FormHelperText>{((errors.userType && touched.userType) && errors.userType)}</FormHelperText>
                     </FormControl>
-                </Grid>
+                </Grid> */}
                 <Stack justifyContent={"space-between"} alignItems={"center"} direction="row" sx={{ mt: 1 }}>
                     <FormGroup >
                         <FormControlLabel control={<Checkbox />} label="Remember me" />

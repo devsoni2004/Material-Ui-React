@@ -5,9 +5,14 @@ const pages={
     FORGOT_PASSWORD:'/forgot',
 
     // PROTECTED ROUTES
+    LOGGED_ROOT:"/app",
     DASHBOARD:"/dashboard",
     ALL_MERCHANTS_DATA:'/all-merchants-data',
-    ACCEPT_USERS:'/accept-users'
+    ACCEPT_USERS:'/accept-users',
+    SUCESS_HISTORY: '/sucess-history',
+    PENDING_HISTORY: '/pending-history',
+    FAILED_HISTORY: '/failed-history'
+
 }
 
 const userTypes = [

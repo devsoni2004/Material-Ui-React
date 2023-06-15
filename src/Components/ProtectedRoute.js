@@ -1,35 +1,34 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Navbar from './Navbar'
 import { Box, Toolbar } from '@mui/material'
 import SideNav from './Sidenav'
-import { Outlet, Route, Routes } from 'react-router-dom'
-import Dashboard from '../pages/Dashboard'
-import AllMerchants from '../pages/AllMerchants'
-import AcceptUser from '../pages/AcceptUser'
-import { pages } from '../common/constants'
+import { Navigate, Outlet, useLocation } from 'react-router-dom'
+import { AppContext } from '../context/AppContext'
 
 const ProtectedRoute = () => {
+    const { appState } = useContext(AppContext);
+    console.log("APP:", appState, appState?.user?.token);
+    const location = useLocation();
+
+    const Layout = () => {
+        return (
+            <div className="bgcolor">
+                <Navbar />
+                <Box sx={{ display: 'flex' }}>
+                    <SideNav />
+                    <Box>
+                        <Toolbar />
+                        <Outlet />
+                    </Box>
+                </Box>
+            </div>
+        )
+    }
     return (
-        <div className="bgcolor">
-            <Navbar />
-            <Box sx={{ display: 'flex' }}>
-                <SideNav />
-                <Routes>
-                    <Route element={
-                        <Box>
-                            <Toolbar />
-                            <Outlet />
-                        </Box>
-                    }>
-                        <Route path={pages.ROOT} exact element={<Dashboard />}></Route>
-                        <Route path={pages.DASHBOARD} exact element={<Dashboard />}></Route>
-                        <Route path={pages.ALL_MERCHANTS_DATA} exact element={<AllMerchants />}></Route>
-                        <Route path={pages.ACCEPT_USERS} exact element={<AcceptUser />}></Route>
-                    </Route>
-                </Routes>
-            </Box>
-        </div>
-    )
+        appState?.user?.token
+            ? <Layout />
+            : <Navigate to="/login" state={{ from: location }} replace />
+    );
 }
 
 export default ProtectedRoute

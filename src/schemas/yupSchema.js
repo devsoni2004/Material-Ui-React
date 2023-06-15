@@ -60,5 +60,5 @@ export const signUpSchema = Yup.object({
 export const signInSchema = Yup.object({
   email: Yup.string().email().required("Please enter your email."),
   password: Yup.string().min(5).required("Please enter your password."),
-  userType: Yup.string().required("Please select user type."),
+  //userType: Yup.string().required("Please select user type."),
 });

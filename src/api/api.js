@@ -17,6 +17,16 @@ export const setHeader = (token) => {
 //config.headers.Authorization = `Bearer ${authContext.getAccessToken()}`;
 
 export const userAuthentication = async (data) => {
+    try {
+        return await axiosClient.post(`/SinghTek/login`, {
+            email: data.email, password: data.password
+        });
+    } catch (error) {
+        console.error(error);
+        return error;
+    }
+}
+export const userAuthenticationOld = async (data) => {
     //1=Singhtek Users", 2=Merchants
     if (data.userType === 1) {
         try {

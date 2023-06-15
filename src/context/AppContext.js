@@ -10,8 +10,8 @@ const initialState = sessionStorage.getItem('appState') ? JSON.parse(sessionStor
 
 function appStateReducer(state, action) {
     switch (action.type) {
-        case actionTypes.UPDATE_TOKEN: {
-            const stateData = { ...state, token: action.payload };
+        case actionTypes.UPDATE_USER: {
+            const stateData = { ...state, user: action.payload };
             sessionStorage.setItem('appState', JSON.stringify(stateData))
             return stateData;
         }
@@ -37,14 +37,13 @@ export const AppContextProvider = ({ children }) => {
     const login = async (data) => {
         try {
             const result = await userAuthentication(data);
-            debugger;
-            if (result !== "error") {
+            if (result.status === 200 && result.data) {
                 dispatch({
-                    type: actionTypes.UPDATE_TOKEN,
-                    payload: result
+                    type: actionTypes.UPDATE_USER,
+                    payload: result.data
                 })
                 navigate(pages.DASHBOARD);
-            }else{
+            } else {
                 console.log(result);
             }
         } catch (err) {

@@ -5,51 +5,32 @@ export const axiosClient = axios.create({
 });
 
 export const setHeader = (token) => {
-    axios.defaults.headers.common["Content-Type"] = `'application/json'`;
+    axiosClient.defaults.headers.common["Content-Type"] = 'application/json';
     if (token) {
-        axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+        axiosClient.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     }
     else {
-        delete axios.defaults.headers.common["Authorization"];
+        delete axiosClient.defaults.headers.common["Authorization"];
     }
 }
-
-//config.headers.Authorization = `Bearer ${authContext.getAccessToken()}`;
 
 export const userAuthentication = async (data) => {
     return await axiosClient.post(`/SinghTek/login`, {
         email: data.email, password: data.password
     });
 }
-export const userAuthenticationOld = async (data) => {
-    //1=Singhtek Users", 2=Merchants
-    if (data.userType === 1) {
-        try {
-            const res = await axiosClient.post(`/SinghTek/login`, {
-                email: data.email, password: data.password
-            });
-            if (res.status === 200 && res.data) {
-                return res.data;
-            }
-            return res;
-        } catch (error) {
-            console.error(error);
-            return error;
-        }
-    }
-    else if (data.userType === 2) {
-        try {
-            const res = await axiosClient.post(`/Merchant/login`, data);
-            if (res.status === 200 && res.data) {
-                return res.data;
-            }
-            return res;
-        } catch (error) {
-            console.error(error);
-            return error;
-        }
-    }
-};
+
+export const getSuccessHistory = async (token) => {
+    return await axiosClient.get(`/SinghTek/getWithdrawals/sucess`, setHeader(token));
+}
+
+export const getPendingHistory = async (token) => {
+    return await axiosClient.get(`/SinghTek/getWithdrawals/pending`, setHeader(token));
+}
+
+export const getFailedHistory = async (token) => {
+    return await axiosClient.get(`/SinghTek/getWithdrawals/failed`, setHeader(token));
+}
 
 export const userRegister = async (data) => {
     try {

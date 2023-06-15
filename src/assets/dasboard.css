@@ -1,0 +1,50 @@
+.padding-all {
+    padding: 10px 10px 10px 10px;
+}
+
+.price-title {
+    font-weight: 500;
+    color: #757575;
+}
+
+.sub-title {
+    font-size: 20px;
+    color: #000;
+    font-weight: 400;
+}
+
+.icon-style {
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.active-link {
+    color: #009cff;
+}
+
+.bgcolor {
+    min-height: 100vh;
+    background: #ECEFF1;
+    background: linear-gradient (158deg, Irgb(224, 224, 224) 0%, rrgb(233, 237, 254) 100%);
+}
+
+
+.payout-title {
+    font-weight: 600;
+    color: #000;
+}
+
+/* .btn-outer {
+    margin-top: 15px;
+    display: flex;
+    justify-content: end;
+} */
+
+
+.custom-spacing {
+    margin-bottom: 10px;
+}
+
+.sidebg {
+    background-color: red;
+}

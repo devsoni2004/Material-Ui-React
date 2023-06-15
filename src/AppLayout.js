@@ -30,7 +30,7 @@ const AppLayout = () => {
                     <Route path={pages.ACCEPT_USERS}  element={<AcceptUser />}></Route>
                     <Route path={pages.SUCESS_HISTORY}  element={<SucessHistory />}></Route>
                     <Route path={pages.PENDING_HISTORY}  element={<PendingHistory />}></Route>
-                    <Route path={pages.PENDING_HISTORY}  element={<FailedHistory />}></Route>
+                    <Route path={pages.FAILED_HISTORY}  element={<FailedHistory />}></Route>
                 </Route>
             </Routes>
         </React.Fragment>

@@ -5,7 +5,6 @@ const pages={
     FORGOT_PASSWORD:'/forgot',
 
     // PROTECTED ROUTES
-    LOGGED_ROOT:"/app",
     DASHBOARD:"/dashboard",
     ALL_MERCHANTS_DATA:'/all-merchants-data',
     ACCEPT_USERS:'/accept-users',

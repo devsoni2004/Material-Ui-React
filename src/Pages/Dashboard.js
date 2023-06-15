@@ -14,7 +14,7 @@ import CreditCardIcon from '@mui/icons-material/CreditCard';
 import Barcharts from '../Charts/Barcharts';
 import PieCharts from '../Charts/PieCharts';
 import CountUp from 'react-countup';
-import "../Dasboard.css";
+// import "../Dasboard.css";
 import { AppContext } from '../context/AppContext';
 
 const Dashboard = () => {

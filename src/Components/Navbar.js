@@ -4,7 +4,6 @@ import MuiAppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
 import Badge from '@mui/material/Badge';
 import MenuItem from '@mui/material/MenuItem';
@@ -16,7 +15,8 @@ import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import { useAppStore } from '../appStore';
-
+import Logo from '../assets/justapay.png'
+import { useState } from 'react';
 const AppBar = styled(MuiAppBar, {
 })(({ theme }) => ({
     zIndex: theme.zIndex.drawer + 1,
@@ -69,7 +69,7 @@ export default function Navbar() {
 
     const updateOpen = useAppStore((state) => state.updateOpen);
     const dopen = useAppStore((state) => state.dopen);
-
+ 
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
@@ -107,7 +107,7 @@ export default function Navbar() {
             open={isMenuOpen}
             onClose={handleMenuClose}
         >
-            <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+            <MenuItem to="../Profile" onClick={handleMenuClose}>Profile</MenuItem>
             <MenuItem onClick={handleMenuClose}>My account</MenuItem>
             <MenuItem onClick={handleMenuClose}>Sign Out</MenuItem>
         </Menu>
@@ -167,7 +167,7 @@ export default function Navbar() {
 
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="fixed" sx={{ backgroundColor: "#ffffff", color: "#2f2f2f" }}>
+            <AppBar position="fixed" sx={{ backgroundColor: "#F3F6F9 !important", color: "#2f2f2f" }}>
                 <Toolbar>
                     <IconButton
                         size="large"
@@ -179,14 +179,13 @@ export default function Navbar() {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Typography
-                        variant="h6"
-                        noWrap
-                        component="div"
-                        sx={{ display: { xs: 'none', sm: 'block' } }}
-                    >
-                        JustaPay
-                    </Typography>
+                    <div>
+                        <img
+                            src={Logo}
+                            alt="Description of the image"
+                            style={{ width: '200px', height: 'auto' }}
+                        />
+                    </div>
                     <Search>
                         <SearchIconWrapper>
                             <SearchIcon />

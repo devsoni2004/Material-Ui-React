@@ -10,17 +10,26 @@ const ProtectedRoute = () => {
     console.log("APP:", appState, appState?.user?.token);
     const location = useLocation();
 
+    // const Layout = () => {
+    //     return (
+    //         <div className="bgcolor">
+    //             <Navbar />
+    //             <Box sx={{ display: 'flex' }}>
+    //                 <SideNav />
+    //                 <Box>
+    //                     <Toolbar />
+    //                     <Outlet />
+    //                 </Box>
+    //             </Box>
+    //         </div>
+    //     )
+    // }
     const Layout = () => {
         return (
             <div className="bgcolor">
                 <Navbar />
-                <Box sx={{ display: 'flex' }}>
-                    <SideNav />
-                    <Box>
-                        <Toolbar />
-                        <Outlet />
-                    </Box>
-                </Box>
+                <SideNav />
+                <Outlet />
             </div>
         )
     }

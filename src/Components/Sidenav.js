@@ -15,10 +15,11 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import Person3Icon from '@mui/icons-material/Person3';
-import { useNavigate } from "react-router-dom"
+import PendingIcon from '@mui/icons-material/Pending';
+import { useNavigate, useLocation } from "react-router-dom"
+import CancelIcon from '@mui/icons-material/Cancel';
 import { useAppStore } from '../appStore';
-import { pages } from '../common/constants';
-
+import {pages} from '../common/constants'
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -71,13 +72,15 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 export default function SideNav() {
     const theme = useTheme();
     const navigate = useNavigate();
+    const location = useLocation();
+    const activeLink = location.pathname;
+
+    const handleNavigation = (link) => {
+        navigate(link);
+    };
+
     const updateOpen = useAppStore((state) => state.updateOpen);
     const open = useAppStore((state) => state.dopen);
-
-    const navigateTo = (path) => {
-        console.log(path);
-        navigate(path)
-    }
     return (
 
         <Box sx={{ display: 'flex' }} >
@@ -94,70 +97,116 @@ export default function SideNav() {
                     </IconButton>
                 </DrawerHeader>
                 <Divider />
-                <List >
-                    <ListItem disablePadding sx={{ display: 'block' }} onClick={()=>navigateTo(pages.ROOT)}>
+                <List>
+                    <ListItem disablePadding sx={{ display: 'block' }}>
                         <ListItemButton
                             sx={{
                                 minHeight: 48,
-                                justifyContent: open ? 'initial' : 'center',
+                                justifyContent: 'center',
                                 px: 2.5,
+                                ml: "8px",
+                                color: activeLink === pages.ROOT ? 'blue' : 'inherit', // Set background color based on activeLink
+                                '&:hover': {
+                                    color: 'blue',
+                                },
                             }}
+                            onClick={() => handleNavigation(pages.ROOT)}
                         >
-                            <ListItemIcon
-                                sx={{
-                                    minWidth: 0,
-                                    mr: open ? 3 : 'auto',
-                                    justifyContent: 'center',
-                                }}
-                            >
-                                <InboxIcon />
+                            <ListItemIcon>
+                                <InboxIcon sx={{
+                                    ml: "18px"
+                                }} />
                             </ListItemIcon>
-                            <ListItemText primary="Dashboard" sx={{ opacity: open ? 1 : 0 }} />
+                            <ListItemText primary="Dashboard" />
                         </ListItemButton>
                     </ListItem>
-                    <ListItem disablePadding sx={{ display: 'block' }} onClick={()=>navigateTo(pages.ALL_MERCHANTS_DATA)}>
+                    <ListItem disablePadding sx={{ display: 'block' }}>
                         <ListItemButton
                             sx={{
                                 minHeight: 48,
-                                justifyContent: open ? 'initial' : 'center',
+                                ml: "8px",
+                                justifyContent: 'center',
                                 px: 2.5,
+                                color: activeLink === pages.ALL_MERCHANTS_DATA ? 'blue' : 'inherit', // Set background color based on activeLink
+
                             }}
+                            onClick={() => handleNavigation(pages.ALL_MERCHANTS_DATA)}
                         >
-                            <ListItemIcon
-                                sx={{
-                                    minWidth: 0,
-                                    mr: open ? 3 : 'auto',
-                                    justifyContent: 'center',
-                                }}
-                            >
-                                <Person3Icon />
+                            <ListItemIcon>
+                                <Person3Icon sx={{
+                                    ml: "18px"
+                                }} />
                             </ListItemIcon>
-                            <ListItemText primary="All Merchants Data" sx={{ opacity: open ? 1 : 0 }} />
+                            <ListItemText primary="All Merchants Data" />
                         </ListItemButton>
                     </ListItem>
-                    <ListItem disablePadding sx={{ display: 'block' }} onClick={()=>navigateTo(pages.ACCEPT_USERS)}>
+                    <ListItem disablePadding sx={{ display: 'block' }}>
                         <ListItemButton
                             sx={{
                                 minHeight: 48,
-                                justifyContent: open ? 'initial' : 'center',
-                                px: 2.5,
+                                justifyContent: 'center',
+                                px: 2.5, ml: "8px",
+                                color: activeLink === pages.SUCESS_HISTORY ? 'blue' : 'inherit', // Set background color based on activeLink
+                                '&:hover': {
+                                    color: 'blue',
+                                },
                             }}
+                            onClick={() => handleNavigation(pages.SUCESS_HISTORY)}
                         >
-                            <ListItemIcon
-                                sx={{
-                                    minWidth: 0,
-                                    mr: open ? 3 : 'auto',
-                                    justifyContent: 'center',
-                                }}
-                            >
-                                <CheckCircleOutlineIcon />
+                            <ListItemIcon>
+                                <CheckCircleOutlineIcon sx={{
+                                    ml: "18px"
+                                }} />
                             </ListItemIcon>
-                            <ListItemText primary="Accept Users" sx={{ opacity: open ? 1 : 0 }} />
+                            <ListItemText primary="Sucess history" />
+                        </ListItemButton>
+                    </ListItem>
+                    <ListItem disablePadding sx={{ display: 'block' }}>
+                        <ListItemButton
+                            sx={{
+                                minHeight: 48, ml: "8px",
+                                justifyContent: 'center',
+                                px: 2.5,
+                                color: activeLink === pages.PENDING_HISTORY ? 'blue' : 'inherit', // Set background color based on activeLink
+                                '&:hover': {
+                                    color: 'blue',
+                                },
+                            }}
+                            onClick={() => handleNavigation(pages.PENDING_HISTORY)}
+                        >
+                            <ListItemIcon>
+                                <PendingIcon sx={{
+                                    ml: "18px"
+                                }} />
+                            </ListItemIcon>
+                            <ListItemText primary="Pending history" />
+                        </ListItemButton>
+                    </ListItem>
+                    <ListItem disablePadding sx={{ display: 'block' }}>
+                        <ListItemButton
+                            sx={{
+                                minHeight: 48, ml: "8px",
+                                justifyContent: 'center',
+                                px: 2.5,
+                                color: activeLink === pages.FAILED_HISTORY ? 'blue' : 'inherit', // Set background color based on activeLink
+                                '&:hover': {
+                                    color: 'blue',
+                                },
+                            }}
+                            onClick={() => handleNavigation(pages.FAILED_HISTORY)}
+                        >
+                            <ListItemIcon>
+                                <CancelIcon sx={{
+                                    ml: "18px"
+                                }} />
+                            </ListItemIcon>
+                            <ListItemText primary="Failed history" />
                         </ListItemButton>
                     </ListItem>
                 </List>
+
                 <Divider />
             </Drawer>
-        </Box>
+        </Box >
     );
 }

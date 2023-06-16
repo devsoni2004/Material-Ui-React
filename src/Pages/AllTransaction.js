@@ -9,7 +9,7 @@ const AllTransaction = () => {
         <div>
             <Navbar />
             <Box height={30} />
-            <Box sx={{display:"flex",overflowX:"hidden"}}>
+            <Box sx={{display:"flex"}}>
                 <SideNav />
                 <Box component="main" sx={{ flexGrow: 10, p: 3 }}>
                 <Withdrawal />

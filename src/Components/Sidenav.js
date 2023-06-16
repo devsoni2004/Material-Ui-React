@@ -19,7 +19,7 @@ import PendingIcon from '@mui/icons-material/Pending';
 import { useNavigate, useLocation } from "react-router-dom"
 import CancelIcon from '@mui/icons-material/Cancel';
 import { useAppStore } from '../appStore';
-import {pages} from '../common/constants'
+import { pages } from '../common/constants'
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -81,12 +81,21 @@ export default function SideNav() {
 
     const updateOpen = useAppStore((state) => state.updateOpen);
     const open = useAppStore((state) => state.dopen);
-    return (
 
-        <Box sx={{ display: 'flex' }} >
-            <CssBaseline />
-            <Box height={30} sx={{ backgroundColor: 'red' }} />
-            <Drawer variant="permanent" open={open} >
+    const ref = React.useRef(null);
+
+    const [width, setWidth] = React.useState(0);
+    const [height, setHeight] = React.useState(0);
+
+    React.useLayoutEffect(() => {
+        setWidth(ref.current.clientWidth);
+        setHeight(ref.current.clientHeight);
+    }, []);
+    console.log("Width:", width, "height:", height)
+    return (
+        // <Box sx={{ display: 'flex' }} ref={ref}>
+
+            <Drawer variant="permanent" open={open} ref={ref}>
                 <DrawerHeader >
                     <IconButton>
                         {theme.direction === "rtl" ? (
@@ -207,6 +216,6 @@ export default function SideNav() {
 
                 <Divider />
             </Drawer>
-        </Box >
+        // </Box >
     );
 }

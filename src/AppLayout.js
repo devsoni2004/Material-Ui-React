@@ -12,12 +12,14 @@ import AcceptUser from './pages/AcceptUser'
 import SucessHistory from './pages/SucessHistory'
 import PendingHistory from './pages/PendingHistory'
 import FailedHistory from './pages/FailedHistory'
+import { CssBaseline } from '@mui/material'
 
 const AppLayout = () => {
     const { appState } = useContext(AppContext);
     console.log("APP:", appState);
     return (
         <React.Fragment>
+            <CssBaseline />
             <Routes>
                 <Route index path={pages.LOGIN} element={<Login />} />
                 <Route path={pages.REGISTER} element={<Register />} />

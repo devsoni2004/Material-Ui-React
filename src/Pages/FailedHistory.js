@@ -5,6 +5,8 @@ import Typography from "@mui/material/Typography";
 import { getFailedHistory } from '../api/api';
 import { useContext } from 'react';
 import { AppContext } from '../context/AppContext';
+import { Paper } from '@mui/material';
+
 export default function FailedHistory() {
   const { appState } = useContext(AppContext);
   const [merchants, setMerchants] = useState([]);
@@ -20,7 +22,7 @@ export default function FailedHistory() {
       });
   }, []);
 
-  
+
   const columns = [
     { field: 'amount', headerName: 'Amount', width: 120 },
     { field: 'bankStatus', headerName: 'Bank Status', width: 150 },
@@ -71,13 +73,11 @@ export default function FailedHistory() {
   }));
 
   return (
-    <div style={{ height: 500, width: '98%' }}>
-
+    <Paper sx={{ overflow: 'hidden', backgroundColor: "#F3F6F9", p: 2 }}  >
       <Typography
         gutterBottom
         variant="h5"
         component="div"
-        sx={{ mt: "3%", ml: "15%" }}
       >
         All Failed History
       </Typography>
@@ -87,8 +87,8 @@ export default function FailedHistory() {
         components={{
           Toolbar: GridToolbar,
         }}
-        sx={{ ml: '15%', mt: '1%', backgroundColor: "#F3F6F9" }}
+        sx={{ backgroundColor: "#F3F6F9" }}
       />
-    </div>
+    </Paper>
   );
 }

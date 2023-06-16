@@ -5,38 +5,22 @@ import Typography from "@mui/material/Typography";
 import { useContext } from 'react';
 import { AppContext } from '../context/AppContext';
 import { getPendingHistory } from '../api/api';
+import {  Paper } from '@mui/material';
+
 export default function PendingHistory() {
-  const { appState } = useContext(AppContext);
+    const { appState } = useContext(AppContext);
     const [merchants, setMerchants] = useState([]);
 
     useEffect(() => {
-      getPendingHistory(appState?.user?.token)
-      .then(function (response) {
-        console.log(response);
-        setMerchants(response.data);
-    })
-    .catch(function (error) {
-        console.log(error);
-    });
+        getPendingHistory(appState?.user?.token)
+            .then(function (response) {
+                console.log(response);
+                setMerchants(response.data);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     }, []);
-
-    // useEffect(() => {
-    //     axios
-    //         .get('https://exuberant-fatigues-jay.cyclic.app/SinghTek/getWithdrawals/pending', {
-    //             headers: {
-    //                 'Content-Type': 'application/json',
-    //                 Authorization:
-    //                     'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDc1Y2ZmMDAzOWM1NDMzMjhhMmQyZWIiLCJpYXQiOjE2ODYwMzUwNjd9.Qy2kZX2qHXSA5_-H4SVgsKxWqgji1Eyw6CtTjEvR-0Y',
-    //             },
-    //         })
-    //         .then(function (response) {
-    //             console.log(response);
-    //             setMerchants(response.data);
-    //         })
-    //         .catch(function (error) {
-    //             console.log(error);
-    //         });
-    // }, []);
 
     const columns = [
         { field: 'amount', headerName: 'Amount', width: 120 },
@@ -88,13 +72,11 @@ export default function PendingHistory() {
     }));
 
     return (
-        <div style={{ height: 500, width: '98%' }}>
-         
+        <Paper sx={{ overflow: 'hidden', backgroundColor: "#F3F6F9", p: 2 }}  >
             <Typography
                 gutterBottom
                 variant="h5"
                 component="div"
-                sx={{ mt: "3%", ml: "15%" }}
             >
                 All Pending History
             </Typography>
@@ -104,8 +86,8 @@ export default function PendingHistory() {
                 components={{
                     Toolbar: GridToolbar,
                 }}
-                sx={{ ml: '15%', mt: '1%', backgroundColor: "#F3F6F9" }}
+                sx={{backgroundColor: "#F3F6F9" }}
             />
-        </div>
+        </Paper>
     );
 }

@@ -5,6 +5,8 @@ import Typography from "@mui/material/Typography";
 import { getSuccessHistory } from '../api/api';
 import { useContext } from 'react';
 import { AppContext } from '../context/AppContext';
+import { Paper } from '@mui/material';
+
 export default function SucessHistory() {
   const { appState } = useContext(AppContext);
   const [merchants, setMerchants] = useState([]);
@@ -71,13 +73,11 @@ export default function SucessHistory() {
   }));
 
   return (
-    <div style={{ height: 500, width: '98%' }}>
-
+    <Paper sx={{ overflow: 'hidden', backgroundColor: "#F3F6F9", p: 2 }}  >
       <Typography
         gutterBottom
         variant="h5"
         component="div"
-        sx={{ mt: "3%", ml: "15%" }}
       >
         All Sucess History
       </Typography>
@@ -87,8 +87,8 @@ export default function SucessHistory() {
         components={{
           Toolbar: GridToolbar,
         }}
-        sx={{ ml: '15%', mt: "22px ", backgroundColor: "#F3F6F9" }}
+        sx={{  backgroundColor: "#F3F6F9" }}
       />
-    </div>
+    </Paper>
   );
 }

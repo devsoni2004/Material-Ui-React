@@ -1,35 +1,32 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import Navbar from './Navbar'
-import { Box, Toolbar } from '@mui/material'
+import { Box,  Toolbar } from '@mui/material'
 import SideNav from './Sidenav'
 import { Navigate, Outlet, useLocation } from 'react-router-dom'
 import { AppContext } from '../context/AppContext'
+import { useAppStore } from '../appStore'
 
 const ProtectedRoute = () => {
     const { appState } = useContext(AppContext);
     console.log("APP:", appState, appState?.user?.token);
     const location = useLocation();
 
-    // const Layout = () => {
-    //     return (
-    //         <div className="bgcolor">
-    //             <Navbar />
-    //             <Box sx={{ display: 'flex' }}>
-    //                 <SideNav />
-    //                 <Box>
-    //                     <Toolbar />
-    //                     <Outlet />
-    //                 </Box>
-    //             </Box>
-    //         </div>
-    //     )
-    // }
+    const updateOpen = useAppStore((state) => state.updateOpen);
+    const dopen = useAppStore((state) => state.dopen);
+
+    useEffect(() => {
+        console.log("dopen:", dopen)
+    }, [dopen])
+
     const Layout = () => {
         return (
             <div className="bgcolor">
                 <Navbar />
                 <SideNav />
-                <Outlet />
+                <Box sx={{ position: 'relative',  ml: dopen ? '260px' : '85px', mt:2}}>
+                    <Toolbar />
+                    <Outlet />
+                </Box>
             </div>
         )
     }

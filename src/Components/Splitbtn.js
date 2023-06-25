@@ -11,7 +11,7 @@ import MenuList from '@mui/material/MenuList';
 
 const options = ['Pending', 'Allow', 'Cancel'];
 
-export default function SplitButton() {
+export default function SplitButton({ id, onClick }) {
     const [open, setOpen] = React.useState(false);
     const anchorRef = React.useRef(null);
     const [selectedIndex, setSelectedIndex] = React.useState(1);
@@ -20,9 +20,10 @@ export default function SplitButton() {
         console.info(`You clicked ${options[selectedIndex]}`);
     };
 
-    const handleMenuItemClick = (event, index) => {
+    const handleMenuItemClick = (event, index, option, id) => {
         setSelectedIndex(index);
         setOpen(false);
+        onClick && onClick(index, option, id)
     };
 
     const handleToggle = () => {
@@ -60,7 +61,7 @@ export default function SplitButton() {
                 anchorEl={anchorRef.current}
                 role={undefined}
                 transition
-                Portal
+
             >
                 {({ TransitionProps, placement }) => (
                     <Grow
@@ -78,7 +79,7 @@ export default function SplitButton() {
                                             key={option}
                                             disabled={index === 2}
                                             selected={index === selectedIndex}
-                                            onClick={(event) => handleMenuItemClick(event, index)}
+                                            onClick={(event) => handleMenuItemClick(event, index, option, id)}
                                         >
                                             {option}
                                         </MenuItem>

@@ -24,7 +24,7 @@ const AddMerchants = ({ closeEvent }) => {
             </Typography>
             <IconButton
                 style={{ position: "absolute", top: "0", right: "0" }}
-                onclick={closeEvent}
+                onClick={closeEvent}
             >
                 <CloseIcon />
             </IconButton>

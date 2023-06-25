@@ -32,6 +32,14 @@ export const getFailedHistory = async (token) => {
     return await axiosClient.get(`/SinghTek/getWithdrawals/failed`, setHeader(token));
 }
 
+export const getMerchants = async (token) => {
+    return await axiosClient.get(`/SinghTek/merchants`, setHeader(token));
+}
+
+export const getAllWithdrawls = async (token) => {
+    return await axiosClient.get(`/SinghTek/allWithdrawals`, setHeader(token));
+}
+
 export const userRegister = async (data) => {
     try {
 

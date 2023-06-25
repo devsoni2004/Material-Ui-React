@@ -13,6 +13,7 @@ import SucessHistory from './pages/SucessHistory'
 import PendingHistory from './pages/PendingHistory'
 import FailedHistory from './pages/FailedHistory'
 import { CssBaseline } from '@mui/material'
+import Profile from './pages/Profile'
 
 const AppLayout = () => {
     const { appState } = useContext(AppContext);
@@ -33,6 +34,7 @@ const AppLayout = () => {
                     <Route path={pages.SUCESS_HISTORY}  element={<SucessHistory />}></Route>
                     <Route path={pages.PENDING_HISTORY}  element={<PendingHistory />}></Route>
                     <Route path={pages.FAILED_HISTORY}  element={<FailedHistory />}></Route>
+                    <Route path={pages.PROFILE}  element={<Profile />}></Route>
                 </Route>
             </Routes>
         </React.Fragment>

@@ -26,12 +26,12 @@ const Dashboard = () => {
               <Card sx={{ minWidth: 49 + "%", height: 150 }} className="gradient">
                 <CardContent>
                   <div>
-                    <CreditCardIcon sx={{ color: "#fff" }} />
+                    <CreditCardIcon  />
                   </div>
-                  <Typography gutterBottom variant="h5" component="div" sx={{ color: "#fff" }}>
+                  <Typography gutterBottom variant="h5" component="div" >
                     <CountUp delay={0.4} end={500} duration={0.6} />
                   </Typography>
-                  <Typography gutterBottom variant="body2" component="div" sx={{ color: "#fff" }}>
+                  <Typography gutterBottom variant="body2" component="div" >
                     Total Merchants
                   </Typography>
                 </CardContent>
@@ -39,12 +39,12 @@ const Dashboard = () => {
               <Card sx={{ minWidth: 49 + "%", height: 150 }} className="gradient2">
                 <CardContent>
                   <div>
-                    <ShoppingBagIcon sx={{ color: "#fff" }} />
+                    <ShoppingBagIcon  />
                   </div>
-                  <Typography gutterBottom variant="h5" component="div" sx={{ color: "#fff" }}>
+                  <Typography gutterBottom variant="h5" component="div" >
                     <CountUp delay={0.4} end={2000} duration={0.6} />
                   </Typography>
-                  <Typography gutterBottom variant="body2" component="div" sx={{ color: "#fff" }}>
+                  <Typography gutterBottom variant="body2" component="div" >
                     Total User
                   </Typography>
                 </CardContent>

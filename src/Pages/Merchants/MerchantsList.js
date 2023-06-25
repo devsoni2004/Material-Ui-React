@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useContext } from 'react';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -9,14 +9,13 @@ import { saveAs } from 'file-saver';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import { useState, useEffect } from 'react'
-import axios from 'axios';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
-import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import TextField from "@mui/material/TextField";
 import Divider from "@mui/material/Divider";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
+import CloudUpload from "@mui/icons-material/CloudUpload";
 import Typography from "@mui/material/Typography";
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import * as XLSX from 'xlsx';
@@ -24,12 +23,14 @@ import Swal from "sweetalert2";
 import Modal from '@mui/material/Modal';
 import Box from "@mui/material/Box";
 import Splitbtn from '../../Components/Splitbtn';
-import AddMerchants from '../AllMerchants';
+
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import { FormHelperText } from '@mui/material';
+import { getAllWithdrawls, getMerchants } from '../../api/api';
+import { AppContext } from '../../context/AppContext';
+import AddMerchants from './AddMerchants';
 
 const style = {
   position: 'absolute',
@@ -82,6 +83,7 @@ const columns = [
 
 
 const MerchantsList = () => {
+  const { appState } = useContext(AppContext);
   const [age, setAge] = useState('');
 
   const handleChange = (event) => {
@@ -92,12 +94,8 @@ const MerchantsList = () => {
   const [merchants, setmerchants] = useState([]);
   const [search, setSearch] = useState('');
   const [currentMerchant, setCurrentMerchant] = useState(null);
-  // const [ExcelData, setExcelData] = useState([]);
-  // const [view, setview] = useState(false);
 
   let [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -107,14 +105,9 @@ const MerchantsList = () => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
-  useEffect(() => {
 
-    axios.get('https://exuberant-fatigues-jay.cyclic.app/SinghTek/merchants', {
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDc1Y2ZmMDAzOWM1NDMzMjhhMmQyZWIiLCJpYXQiOjE2ODYwMzUwNjd9.Qy2kZX2qHXSA5_-H4SVgsKxWqgji1Eyw6CtTjEvR-0Y'
-      },
-    })
+  useEffect(() => {
+    getMerchants(appState?.user?.token)
       .then(function (response) {
         console.log(response);
         setmerchants(response.data);
@@ -124,7 +117,7 @@ const MerchantsList = () => {
       });
   }, []);
 
-  const deleteUser = (singhtek_id) => {
+  const deleteUser = (_id) => {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -134,21 +127,16 @@ const MerchantsList = () => {
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
+      console.log("result:", result)
       if (result.value) {
+        alert(_id);
         // deleteApi(singhtek_id);
       }
     });
   };
 
-
-
   const exportToExcel = async () => {
-    const res = axios.get('https://exuberant-fatigues-jay.cyclic.app/SinghTek/allWithdrawals', {
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDc1Y2ZmMDAzOWM1NDMzMjhhMmQyZWIiLCJpYXQiOjE2ODYwMzUwNjd9.Qy2kZX2qHXSA5_-H4SVgsKxWqgji1Eyw6CtTjEvR-0Y'
-      },
-    })
+    const res = getAllWithdrawls(appState?.user?.token)
     const result = await res;
     const data = result.data;
 
@@ -173,17 +161,21 @@ const MerchantsList = () => {
 
     saveAs(blob, 'data.xlsx');
   };
+
+  const updateStatus=(id)=>{
+    alert(id)
+  }
   return (
     <>
       <div>
         <Modal
           open={open}
-          onClose={handleClose}
+          onClose={() => setOpen(false)}
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
-            <AddMerchants closeEvent={handleClose} />
+            <AddMerchants closeEvent={() => setOpen(false)} />
           </Box>
         </Modal>
       </div>
@@ -197,10 +189,10 @@ const MerchantsList = () => {
             All Merchants Data
           </Typography>
 
-          <Stack direction={"row"} sx={{ justifyContent: "space-between" }}>
+          <Stack direction={"row"} sx={{ justifyContent: "space-between", gap: 1 }}>
             <Stack direction={"row"} spacing={3}>
               <TextField sx={{ minWidth: 250 }} label="Search" variant="outlined" onChange={(e) => setSearch(e.target.value)} />
-              <FormControl sx={{ minWidth: 250 }} >
+              <FormControl sx={{ minWidth: 200 }} >
                 <InputLabel id="demo-simple-select-label">Filter Merchant</InputLabel>
                 <Select
                   labelId="demo-simple-select-label"
@@ -213,17 +205,22 @@ const MerchantsList = () => {
                   <MenuItem value={30}>Cancel</MenuItem>
                 </Select>
               </FormControl>
+
             </Stack>
             <Stack direction={"row"} spacing={3}>
-              <Button variant="contained" endIcon={<AddCircleIcon />} onClick={handleOpen} >
+              <Button variant="contained" component="label" endIcon={<CloudUpload />}>
+                Upload
+                <input name="upload-photo" type="file" hidden accept="image/*" />
+              </Button>
+              <Button variant="contained" endIcon={<AddCircleIcon />} onClick={() => setOpen(true)} >
                 Add Merchant
               </Button>
               <Button variant="contained" onClick={exportToExcel}>Export Withdrawal Reqest</Button>
             </Stack>
           </Stack>
-          <Divider sx={{p:1}}/>
-         
-          <TableContainer sx={{ maxHeight: 440,pt:2 }} >
+          <Divider sx={{ p: 1 }} />
+
+          <TableContainer sx={{ maxHeight: 440, pt: 2 }} >
             <Table stickyHeader aria-label="sticky table" >
               <TableHead sx={{ backgroundColor: "#F3F6F9" }} >
                 <TableRow>
@@ -259,8 +256,8 @@ const MerchantsList = () => {
                         ? item
                         : item.user_name.toLowerCase().includes(search);
                     })
-                    .map(item => (
-                      <TableRow hover role="checkbox tabindex={-1}">
+                    .map((item, idx) => (
+                      <TableRow key={idx} hover role="checkbox tabindex={-1}">
                         <TableCell key={item.singhtek_id} align="left">
                           {item.singhtek_id}
                         </TableCell>
@@ -279,22 +276,25 @@ const MerchantsList = () => {
                         </TableCell>
                         <TableCell align="left">
                           <Stack direction="row" className="btn-outer">
-                            <Button>
-                              <Splitbtn />
-                            </Button>
+                            {/* <Button> */}
+                            <Splitbtn id={item._id} onClick={(idx, option, id) => {
+                              console.log(idx, option, id);
+                                updateStatus(item._id);
+                              }}/>
+                            {/* </Button> */}
                           </Stack>
                         </TableCell>
                         <TableCell align="left">
                           <Stack spacing={2} direction="row">
-                            <EditIcon
+                            {/* <EditIcon
                               style={{
                                 fontSize: "20px",
                                 color: "blue",
                                 cursor: "pointer",
                               }}
                               className="cursor-pointer"
-                            // onClick={() => editUser(row.id)}
-                            />
+                              onClick={() => editUser(row.id)}
+                            /> */}
                             <DeleteIcon
                               style={{
                                 fontSize: "20px",
@@ -302,7 +302,7 @@ const MerchantsList = () => {
                                 cursor: "pointer",
                               }}
                               onClick={() => {
-                                deleteUser(item.singhtek_id);
+                                deleteUser(item._id);
                               }}
                             />
                             <RemoveRedEyeIcon />

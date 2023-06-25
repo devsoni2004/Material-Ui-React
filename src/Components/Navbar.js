@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useContext } from 'react';
 import { styled, alpha } from '@mui/material/styles';
 import MuiAppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -16,7 +16,10 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import { useAppStore } from '../appStore';
 import Logo from '../assets/justapay.png'
-import { useState } from 'react';
+import { AppContext } from '../context/AppContext';
+import { pages } from '../common/constants';
+import { useNavigate } from 'react-router-dom';
+
 const AppBar = styled(MuiAppBar, {
 })(({ theme }) => ({
     zIndex: theme.zIndex.drawer + 1,
@@ -64,12 +67,16 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function Navbar() {
+    const { appState, logout } = useContext(AppContext);
+    console.log("Navbar:", appState);
+    const navigate = useNavigate();
+
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
     const updateOpen = useAppStore((state) => state.updateOpen);
     const dopen = useAppStore((state) => state.dopen);
- 
+
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
@@ -81,9 +88,10 @@ export default function Navbar() {
         setMobileMoreAnchorEl(null);
     };
 
-    const handleMenuClose = () => {
+    const handleMenuClose = (path) => {
         setAnchorEl(null);
         handleMobileMenuClose();
+        navigate(path)
     };
 
     const handleMobileMenuOpen = (event) => {
@@ -107,9 +115,9 @@ export default function Navbar() {
             open={isMenuOpen}
             onClose={handleMenuClose}
         >
-            <MenuItem to="../Profile" onClick={handleMenuClose}>Profile</MenuItem>
+            <MenuItem onClick={()=>handleMenuClose(pages.PROFILE)}>Profile</MenuItem>
             <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-            <MenuItem onClick={handleMenuClose}>Sign Out</MenuItem>
+            <MenuItem onClick={logout}>Sign Out</MenuItem>
         </Menu>
     );
 

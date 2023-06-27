@@ -20,8 +20,6 @@ export default function Barcharts() {
   return (
     <Chart
       chartType="Bar"
-      width="100%"
-      height="450px"
       data={data}
       options={options}
     />

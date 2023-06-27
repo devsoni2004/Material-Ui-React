@@ -1,4 +1,4 @@
-import React,{ useContext } from 'react'
+import React, { useContext } from 'react'
 import Accordian from '../Components/Accordian'
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -19,47 +19,47 @@ const Dashboard = () => {
   console.log("Dashboard:", appState);
   return (
     <React.Fragment>
-      <Box component="main"  >
-        <Grid container spacing={2}>
-          <Grid item xs={8}>
-            <Stack spacing={2} direction="row">
-              <Card sx={{ minWidth: 49 + "%", height: 150 }} className="gradient">
-                <CardContent>
-                  <div>
-                    <CreditCardIcon  />
-                  </div>
-                  <Typography gutterBottom variant="h5" component="div" >
-                    <CountUp delay={0.4} end={500} duration={0.6} />
-                  </Typography>
-                  <Typography gutterBottom variant="body2" component="div" >
-                    Total Merchants
-                  </Typography>
-                </CardContent>
-              </Card>
-              <Card sx={{ minWidth: 49 + "%", height: 150 }} className="gradient2">
-                <CardContent>
-                  <div>
-                    <ShoppingBagIcon  />
-                  </div>
-                  <Typography gutterBottom variant="h5" component="div" >
-                    <CountUp delay={0.4} end={2000} duration={0.6} />
-                  </Typography>
-                  <Typography gutterBottom variant="body2" component="div" >
-                    Total User
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Stack>
-          </Grid>
-          <Grid item xs={4}>
-            <Stack spacing={2}>
-              <Card sx={{ maxwidth: 345 }} className="gradient2">
-
+      <Box component="main">
+        <Box sx={{ pr: 2 }}>
+          <Stack spacing={2} direction={"row"}>
+            <Card sx={{ display: 'flex', flexGrow: 1 }}>
+              <CardContent>
                 <Stack spacing={2} direction="row">
                   <div className="icon-style">
-                    <StorefrontIcon sx={{ color: "#fff" }} />
+                    <CreditCardIcon />
                   </div>
-
+                  <div className="padding-all">
+                    <span className="price-title">
+                      <CountUp delay={0.4} end={500} duration={0.6} />
+                    </span>
+                    <br />
+                    <span className="sub-title">Total Merchants</span>
+                  </div>
+                </Stack>
+              </CardContent>
+            </Card>
+            <Card sx={{ display: 'flex', flexGrow: 1 }}>
+              <CardContent>
+                <Stack spacing={2} direction="row">
+                  <div className="icon-style">
+                    <ShoppingBagIcon />
+                  </div>
+                  <div className="padding-all">
+                    <span className="price-title">
+                      <CountUp delay={0.4} end={2000} duration={0.6} />
+                    </span>
+                    <br />
+                    <span className="sub-title">Total User</span>
+                  </div>
+                </Stack>
+              </CardContent>
+            </Card>
+            <Card sx={{ display: 'flex', flexGrow: 1 }}>
+              <CardContent>
+                <Stack spacing={2} direction="row">
+                  <div className="icon-style">
+                    <StorefrontIcon />
+                  </div>
                   <div className="padding-all">
                     <span className="price-title">
                       <CountUp delay={0.4} end={8000} duration={0.6} />
@@ -68,14 +68,14 @@ const Dashboard = () => {
                     <span className="sub-title">Cancel User</span>
                   </div>
                 </Stack>
-
-              </Card>
-              <Card sx={{ maxwidth: 345 }} className="gradient3">
+              </CardContent>
+            </Card>
+            <Card sx={{ display: 'flex', flexGrow: 1 }}>
+              <CardContent>
                 <Stack spacing={2} direction="row">
                   <div className="icon-style">
-                    <StorefrontIcon sx={{ color: "#fff" }} />
+                    <StorefrontIcon />
                   </div>
-
                   <div className="padding-all">
                     <span className="price-title">
                       <CountUp delay={0.2} end={7000} duration={0.6} />
@@ -84,21 +84,18 @@ const Dashboard = () => {
                     <span className="sub-title">Accpet Users</span>
                   </div>
                 </Stack>
-              </Card>
-            </Stack>
-          </Grid>
-        </Grid>
-        <Box height={20} />
-        <Grid container spacing={2}>
-          <Grid item xs={8}>
-            <Card sx={{ height: 55 + "vh" }}>
+              </CardContent>
+            </Card>
+          </Stack>
+        </Box>
+        <Box sx={{ mt: 2, pr: 2, display: 'flex', justifyContent: 'space-between' }}>
+          <Stack spacing={2} direction={"row"} sx={{ justifyContent: "space-between", alignItems: "flex-start" }}>
+            <Card sx={{ width: '50%', height:'100%'}}>
               <CardContent>
                 <Barcharts />
               </CardContent>
             </Card>
-          </Grid>
-          <Grid item xs={4}>
-            <Card sx={{ height: 55 + "vh" }}>
+            <Card sx={{ width: '50%'}}>
               <CardContent>
                 <div className="padding-all">
                   <span className="payout-title">Payout Details</span>
@@ -108,10 +105,8 @@ const Dashboard = () => {
                 <PieCharts />
               </CardContent>
             </Card>
-          </Grid>
-        </Grid>
-      </Box>
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+          </Stack>
+        </Box>
       </Box>
     </React.Fragment>
   )
